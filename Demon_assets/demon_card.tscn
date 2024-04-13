@@ -10,17 +10,38 @@ script = ExtResource("1_sc3gs")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 clip_contents = true
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 410.0
-offset_top = 14.0
-offset_right = -410.001
-offset_bottom = -14.0
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -300.0
+offset_right = 150.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(300, 600)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="PanelContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
+keep_aspect = 0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PanelContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.999693, 0.0247637, 0, -0.0247637, 0.999693, 0, 0, 0, 1, 0, 1.23143, 0)
+
 [node name="photo" type="TextureRect" parent="PanelContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_faytf")
 expand_mode = 4
@@ -68,22 +89,63 @@ text = "100
 "
 
 [node name="Buttons_grid" type="Panel" parent="PanelContainer/Info_vbox"]
+visible = false
 custom_minimum_size = Vector2(35.96, 170.46)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Info_vbox/Buttons_grid"]
-layout_mode = 0
-offset_right = 1604.0
-offset_bottom = 800.0
-scale = Vector2(0.21, 0.21)
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/Info_vbox"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Info_vbox/MarginContainer3"]
+layout_mode = 2
 alignment = 1
 
-[node name="decline" type="TextureButton" parent="PanelContainer/Info_vbox/Buttons_grid/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Info_vbox/MarginContainer3/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_dml05")
+theme_override_constants/margin_right = 25
 
-[node name="accept" type="TextureButton" parent="PanelContainer/Info_vbox/Buttons_grid/HBoxContainer"]
-layout_direction = 2
+[node name="decline" type="Button" parent="PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
-texture_normal = ExtResource("2_dj31m")
-stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer/decline"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dml05")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/Info_vbox/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="accept" type="Button" parent="PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer2/accept"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_dj31m")
+expand_mode = 2

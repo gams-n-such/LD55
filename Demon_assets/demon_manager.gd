@@ -30,11 +30,11 @@ func reset_current_card():
 		print(str(declined_names))
 
 func on_card_accepted(card : Demon_card):
-	accepted_names.push_back(card.demon.Name)
+	accepted_names.push_back(card.demon.NAME)
 	reset_current_card()
 	pass
 
 func on_card_declined(card : Demon_card):
-	declined_names.push_back(card.demon.Name)
+	declined_names.push_back(card.demon.NAME)
 	reset_current_card()
 	pass

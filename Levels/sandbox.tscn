@@ -41,5 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Demon" parent="." instance=ExtResource("1_7luf4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48497, 0)
+is_active = true
 
 [node name="Demon_manager" parent="." instance=ExtResource("2_yy123")]
