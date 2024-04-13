@@ -1,7 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2uig8x87eq8s"]
+[gd_scene load_steps=17 format=3 uid="uid://d2uig8x87eq8s"]
 
-[ext_resource type="ArrayMesh" uid="uid://cecl0igsp7561" path="res://Demon_assets/demons/domo.obj" id="1_k01ca"]
-[ext_resource type="Script" path="res://Domo.gd" id="2_l84vr"]
+[ext_resource type="Script" path="res://Demon_assets/demons/randomhead.gd" id="1_tuuii"]
+[ext_resource type="ArrayMesh" uid="uid://b82vvl47wp8ac" path="res://Demon_assets/demons/adv/domo_body-1-imp.obj" id="2_mp1qm"]
+[ext_resource type="Script" path="res://Demon_assets/demons/Domo.gd" id="3_jui1j"]
+[ext_resource type="ArrayMesh" uid="uid://cm1inxwtycgoy" path="res://Demon_assets/demons/adv/domo_body-0-imp.obj" id="4_xc600"]
+[ext_resource type="ArrayMesh" uid="uid://c5mqgqw50fa83" path="res://Demon_assets/demons/adv/domo_body-2-body.obj" id="5_uguf6"]
+[ext_resource type="Texture2D" uid="uid://bnqyypn825i3b" path="res://Demon_assets/demons/adv/demo_logo2.png" id="6_86qvk"]
+[ext_resource type="Texture2D" uid="uid://d4nbdgg6birjy" path="res://Demon_assets/demons/adv/bg1.png" id="7_5kl42"]
+[ext_resource type="Texture2D" uid="uid://k67ouykrntpm" path="res://Demon_assets/demons/adv/demo_logo.png" id="7_nokv4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6d2a"]
+albedo_texture = ExtResource("6_86qvk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhixk"]
+albedo_texture = ExtResource("7_5kl42")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cjesy"]
+material = SubResource("StandardMaterial3D_rhixk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybb1e"]
+albedo_texture = ExtResource("7_nokv4")
 
 [sub_resource type="Environment" id="Environment_jec0h"]
 background_mode = 1
@@ -10,22 +28,67 @@ background_energy_multiplier = 0.53
 
 [sub_resource type="BoxMesh" id="BoxMesh_8e33d"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_th83c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_28hl0"]
+albedo_color = Color(0.141176, 0.141176, 0.141176, 0.301961)
+
 [node name="Privew3dDemon" type="Node"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.835779, 0.549067, 0, -0.549067, 0.835779, -0.58481, 5.5821, 5.59968)
 
-[node name="Domo" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33892, 0, -2.24696)
-mesh = ExtResource("1_k01ca")
-script = ExtResource("2_l84vr")
+[node name="demon_look" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71298, -2.27069, -2.24696)
+
+[node name="randomhead" type="Node3D" parent="demon_look"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27069, 0)
+script = ExtResource("1_tuuii")
+
+[node name="Domo3" type="MeshInstance3D" parent="demon_look/randomhead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35545, 0, 0)
+mesh = ExtResource("2_mp1qm")
+skeleton = NodePath("../../..")
+script = ExtResource("3_jui1j")
+
+[node name="Domo2" type="MeshInstance3D" parent="demon_look/randomhead"]
+mesh = ExtResource("4_xc600")
+skeleton = NodePath("../../..")
+script = ExtResource("3_jui1j")
+
+[node name="Domo" type="MeshInstance3D" parent="demon_look"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27069, 0)
+mesh = ExtResource("5_uguf6")
+skeleton = NodePath("../..")
+script = ExtResource("3_jui1j")
+
+[node name="randomlogo" type="Node3D" parent="demon_look"]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0.140206, 2.46888, 0.0561628)
+script = ExtResource("1_tuuii")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="demon_look/randomlogo"]
+transform = Transform3D(1, 0, 0, 0, 1, 3.55271e-15, 0, -3.55271e-15, 1, 0, 0.185278, 0)
+material_override = SubResource("StandardMaterial3D_y6d2a")
+mesh = SubResource("PlaneMesh_cjesy")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="demon_look/randomlogo"]
+transform = Transform3D(1, 0, 0, 0, 1, 3.55271e-15, 0, -3.55271e-15, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ybb1e")
+mesh = SubResource("PlaneMesh_cjesy")
+skeleton = NodePath("../../..")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.874537, 0, -0.261713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248599, 0, -0.261713)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jec0h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, -1.17724, -2.439, -2.1271)
+transform = Transform3D(4.09924, 0, 0, 0, 1, 0, 0, 0, 2.01824, -0.551305, -2.439, -2.1271)
 mesh = SubResource("BoxMesh_8e33d")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 5, -0.774109, -2.50758, -1.63717)
+mesh = SubResource("SphereMesh_th83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_28hl0")

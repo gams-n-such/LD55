@@ -8,7 +8,11 @@ signal declined(from : Demon_card)
 @export var accept:BaseButton
 @export var decline:BaseButton
 
-@onready var demon = load("res://Demon_assets/Demon.tscn").instantiate()
+var demon
+
+func _enter_tree():
+	demon = load("res://Demon_assets/Demon.tscn").instantiate()
+	print("my name is:"+name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

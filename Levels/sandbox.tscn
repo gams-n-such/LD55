@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxtq3qx5uuka8"]
+[gd_scene load_steps=11 format=3 uid="uid://bxtq3qx5uuka8"]
 
 [ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="1_7luf4"]
 [ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/demon_manager.tscn" id="2_yy123"]
@@ -7,9 +7,20 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_2upgq"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffn0c"]
+albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_oggdw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_258m0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_iovbl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvsud"]
+albedo_color = Color(0.501961, 0.345098, 0.0196078, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_em3y7"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [node name="Sandbox" type="Node3D"]
 
@@ -22,6 +33,7 @@ shape = SubResource("BoxShape3D_pms0h")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_2upgq")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ffn0c")
 
 [node name="box" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62778, 1.10069, 0)
@@ -43,3 +55,18 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48497, 0)
 
 [node name="Demon_manager" parent="." instance=ExtResource("2_yy123")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(23.1394, 0, 0, 0, 0.990974, 1.06821, 0, -0.134055, 7.89654, 0, 0.446264, 20)
+mesh = SubResource("BoxMesh_iovbl")
+surface_material_override/0 = SubResource("StandardMaterial3D_bvsud")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_em3y7")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.089, 14.8418)
+light_energy = 16.0
+omni_range = 23.1435
