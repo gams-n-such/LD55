@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DemonType" load_steps=2 format=3 uid="uid://dvh7v844xml6s"]
+
+[ext_resource type="Script" path="res://Demon_assets/demon_type.gd" id="1_ps4su"]
+
+[resource]
+script = ExtResource("1_ps4su")
+label = "Arch Devil"
+power = 1.0
+attack_speed = 1.0
+health = 10.0
+move_speed = 10.0

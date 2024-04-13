@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DemonType" load_steps=2 format=3 uid="uid://cnenfs8jw1ksf"]
+
+[ext_resource type="Script" path="res://Demon_assets/demon_type.gd" id="1_axvc8"]
+
+[resource]
+script = ExtResource("1_axvc8")
+label = "Cultist"
+power = 1.0
+attack_speed = 1.0
+health = 10.0
+move_speed = 10.0
