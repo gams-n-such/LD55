@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ikhqs0utn87o"]
 
-[ext_resource type="Texture2D" uid="uid://dx3drjl6qj7h1" path="res://Demon_assets/demon_preview.png" id="1_4dmqw"]
 [ext_resource type="Script" path="res://Demon_assets/demon_card.gd" id="1_sc3gs"]
 [ext_resource type="Texture2D" uid="uid://bsce5kqkcacvi" path="res://Demon_assets/accept-svgrepo-com.svg" id="2_dj31m"]
+[ext_resource type="Texture2D" uid="uid://dh1mbr82dy11b" path="res://Demon_assets/demon_preview.jpg" id="2_faytf"]
 [ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/decline-solid-svgrepo-com.svg" id="3_dml05"]
 
 [node name="Demon_card" type="CanvasLayer"]
@@ -22,7 +22,7 @@ grow_vertical = 2
 
 [node name="photo" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
-texture = ExtResource("1_4dmqw")
+texture = ExtResource("2_faytf")
 expand_mode = 4
 stretch_mode = 6
 
@@ -87,6 +87,3 @@ layout_direction = 2
 layout_mode = 2
 texture_normal = ExtResource("2_dj31m")
 stretch_mode = 0
-
-[connection signal="pressed" from="PanelContainer/Info_vbox/Buttons_grid/HBoxContainer/decline" to="." method="_on_decline_pressed"]
-[connection signal="pressed" from="PanelContainer/Info_vbox/Buttons_grid/HBoxContainer/accept" to="." method="_on_accept_pressed"]

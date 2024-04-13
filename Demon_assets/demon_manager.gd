@@ -22,6 +22,7 @@ func reset_current_card():
 		(cards_stack.back() as Demon_card).accepted.connect(on_card_accepted)
 		(cards_stack.back() as Demon_card).declined.connect(on_card_declined)
 		add_child(cards_stack.back())
+		move_child(cards_stack.back(), 0)
 	else:
 		print("accepted : ")
 		print(str(accepted_names))
