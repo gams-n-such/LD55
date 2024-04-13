@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="LD_55"
-run/main_scene="res://Levels/sandbox.tscn"
+run/main_scene="res://Menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Game="*res://Core/game.gd"
 
 [input]
 
