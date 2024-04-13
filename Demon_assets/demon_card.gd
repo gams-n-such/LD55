@@ -5,6 +5,9 @@ class_name Demon_card
 signal accepted(from : Demon_card)
 signal declined(from : Demon_card)
 
+@export var accept:BaseButton
+@export var decline:BaseButton
+
 @onready var demon = load("res://Demon_assets/Demon.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
@@ -35,9 +38,9 @@ func animate_and_free(accepted : bool):
 	pos_tween.tween_callback(queue_free)
 
 func connect_signals():
-	$PanelContainer/Info_vbox/Buttons_grid/HBoxContainer/accept.pressed.connect(_on_accept_pressed)
-	$PanelContainer/Info_vbox/Buttons_grid/HBoxContainer/decline.pressed.connect(_on_decline_pressed)
+	accept.pressed.connect(_on_accept_pressed)
+	decline.pressed.connect(_on_decline_pressed)
 
 func disconnect_signals():
-	$PanelContainer/Info_vbox/Buttons_grid/HBoxContainer/accept.pressed.disconnect(_on_accept_pressed)
-	$PanelContainer/Info_vbox/Buttons_grid/HBoxContainer/decline.pressed.disconnect(_on_decline_pressed)
+	accept.pressed.disconnect(_on_accept_pressed)
+	decline.pressed.disconnect(_on_decline_pressed)
