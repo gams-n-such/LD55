@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cebu5lkjfyd3s"]
+
+[ext_resource type="Script" path="res://Demon_assets/legion/card/legion_card.gd" id="1_hkrv7"]
+
+[node name="LegionCard" type="CanvasLayer"]
+script = ExtResource("1_hkrv7")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

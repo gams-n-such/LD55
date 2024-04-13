@@ -4,6 +4,8 @@ extends Node
 @onready var how_to_play_scene : PackedScene = load("res://Menu/HowToPlay/HowToPlay.tscn")
 @onready var sandbox_scene : PackedScene = load("res://Levels/sandbox.tscn")
 
+@export var player_state : PlayerState = PlayerState.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
