@@ -1,7 +1,5 @@
-class_name Campaign extends Node
+class_name DemonRecruitingState extends Node
 
-@export var levels : Array[Level] = []
-@export var current_player_state : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
