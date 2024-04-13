@@ -1,7 +1,9 @@
-class_name Campaign extends Node
+extends CanvasLayer
 
-@export var levels : Array[Level] = []
-@export var current_player_state : String
+@export var displayed_demon : Demon
+
+func _init(demon : Demon):
+	displayed_demon = demon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

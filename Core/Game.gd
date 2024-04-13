@@ -2,6 +2,9 @@ extends Node
 
 @onready var menu_scene : PackedScene = load("res://Menu/main_menu.tscn")
 @onready var how_to_play_scene : PackedScene = load("res://Menu/HowToPlay/HowToPlay.tscn")
+@onready var sandbox_scene : PackedScene = load("res://Levels/sandbox.tscn")
+
+@export var player_state : PlayerState = PlayerState.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,3 +22,7 @@ func switch_to_menu_level():
 
 func switch_to_how_to_play_level():
 	get_tree().change_scene_to_packed(how_to_play_scene)
+
+
+func switch_to_sandbox_level():
+	get_tree().change_scene_to_packed(sandbox_scene)

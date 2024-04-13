@@ -32,6 +32,7 @@ func reset_current_card():
 func on_card_accepted(card : Demon_card):
 	accepted_names.push_back(card.demon.NAME)
 	reset_current_card()
+	Game.player_state.player_legion.add_demon(card.demon)
 	pass
 
 func on_card_declined(card : Demon_card):

@@ -1,7 +1,9 @@
-class_name Campaign extends Node
+class_name LegionPanel extends GridContainer
 
-@export var levels : Array[Level] = []
-@export var current_player_state : String
+@export var displayed_legion : Legion
+
+func _init(legion_to_display : Legion):
+	displayed_legion = legion_to_display
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -15,7 +15,7 @@ func _process(delta):
 
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file(\"res://Levels/sandbox.tscn\")
+	Game.switch_to_sandbox_level()
 
 
 func _on_how_to_play_pressed():
