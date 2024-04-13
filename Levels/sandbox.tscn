@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxtq3qx5uuka8"]
+[gd_scene load_steps=7 format=3 uid="uid://bxtq3qx5uuka8"]
 
 [ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="1_7luf4"]
+[ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/demon_manager.tscn" id="2_yy123"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pms0h"]
 
@@ -40,3 +41,5 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Demon" parent="." instance=ExtResource("1_7luf4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48497, 0)
+
+[node name="Demon_manager" parent="." instance=ExtResource("2_yy123")]

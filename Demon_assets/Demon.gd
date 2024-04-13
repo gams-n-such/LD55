@@ -1,9 +1,11 @@
 extends CharacterBody3D
 class_name Demon
 
-@export var SPEED = 15.0
+var Health := randf_range(100.0, 500.0)
+var Damage := randf_range(10.0, 50.0)
+var Name := "name " + str(randi_range(0, 2048))
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+@export var SPEED = 15.0
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta):
