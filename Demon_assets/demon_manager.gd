@@ -1,10 +1,13 @@
 extends CanvasLayer
 
+# for debugging
 var accepted_names = []
 var declined_names = []
+
+# global variables
+var accepted_demons = []
 var cards_stack = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in 5:
 		cards_stack.push_back(load("res://Demon_assets/demon_card.tscn").instantiate())
@@ -31,6 +34,7 @@ func reset_current_card():
 
 func on_card_accepted(card : Demon_card):
 	accepted_names.push_back(card.demon.NAME)
+	accepted_demons.push_back(card.demon)
 	reset_current_card()
 	Game.player_state.player_legion.add_demon(card.demon)
 	pass

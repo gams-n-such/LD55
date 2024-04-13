@@ -6,22 +6,38 @@ signal accepted(from : Demon_card)
 signal declined(from : Demon_card)
 
 @onready var demon = load("res://Demon_assets/Demon.tscn").instantiate()
-# Called when the node enters the scene tree for the first time.
+@onready var ANIMATION_DURATION := 0.75
+
 func _ready():
-	$PanelContainer/Info_vbox/Name_age_vbox/name.text = demon.NAME
-	$PanelContainer/SubViewportContainer/SubViewport.add_child(demon)
-	demon.position = $PanelContainer/SubViewportContainer/SubViewport/Camera3D.position - Vector3(0, 1, 2)
+	# add demon to subviewport for preview
+	%SubViewport.add_child(demon)
+	demon.position = %Camera3D.position - Vector3(0, 1, 2)
+	
+	# set name and age
+	%name.text = demon.NAME
+	%age.text = str(randi_range(100, 9999))
+	
+	# set stats
+	var stats_grid := %stats_grid
+	for stat_name in demon.STATS:
+		var stat_name_label := Label.new()
+		var stat_value_label := Label.new()
+		stat_name_label.text = stat_name
+		stat_value_label.text = str(demon.STATS[stat_name])
+		stats_grid.add_child(stat_name_label)
+		stats_grid.add_child(stat_value_label)
+	
+	# connect to button presses
 	connect_signals()
-	pass
 
 func on_accept_pressed():
-	$PanelContainer/SubViewportContainer/SubViewport.remove_child(demon)
+	%SubViewport.remove_child(demon)
 	disconnect_signals()
 	accepted.emit(self)
 	animate_and_free(true)
 
 func on_decline_pressed():
-	$PanelContainer/SubViewportContainer/SubViewport.remove_child(demon)
+	%SubViewport.remove_child(demon)
 	disconnect_signals()
 	declined.emit(self)
 	animate_and_free(false)
@@ -30,17 +46,17 @@ func animate_and_free(accepted : bool):
 	var alpha_tween = get_tree().create_tween()
 	var pos_tween = get_tree().create_tween()
 	if accepted == true:
-		alpha_tween.tween_property($PanelContainer, "modulate", Color(Color.GREEN, 0.0), 2.0)
-		pos_tween.tween_property($PanelContainer, "position", $PanelContainer.position + Vector2(100, 0), 2.0)
+		alpha_tween.tween_property($PanelContainer, "modulate", Color(Color.GREEN, 0.0), ANIMATION_DURATION)
+		pos_tween.tween_property($PanelContainer, "position", $PanelContainer.position + Vector2(100, 0), ANIMATION_DURATION)
 	else:
-		alpha_tween.tween_property($PanelContainer, "modulate", Color(Color.RED, 0.0), 2.0)
-		pos_tween.tween_property($PanelContainer, "position", $PanelContainer.position + Vector2(-100, 0), 2.0)
+		alpha_tween.tween_property($PanelContainer, "modulate", Color(Color.RED, 0.0), ANIMATION_DURATION)
+		pos_tween.tween_property($PanelContainer, "position", $PanelContainer.position + Vector2(-100, 0), ANIMATION_DURATION)
 	pos_tween.tween_callback(queue_free)
 
 func connect_signals():
-	$PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer2/accept.pressed.connect(on_accept_pressed)
-	$PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer/decline.pressed.connect(on_decline_pressed)
+	%accept.pressed.connect(on_accept_pressed)
+	%decline.pressed.connect(on_decline_pressed)
 
 func disconnect_signals():
-	$PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer2/accept.pressed.disconnect(on_accept_pressed)
-	$PanelContainer/Info_vbox/MarginContainer3/HBoxContainer/MarginContainer/decline.pressed.disconnect(on_decline_pressed)
+	%accept.pressed.disconnect(on_accept_pressed)
+	%decline.pressed.disconnect(on_decline_pressed)
