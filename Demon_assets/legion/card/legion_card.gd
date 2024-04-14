@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name LegionCard extends Control
 
 @export var displayed_demon : Demon
 
