@@ -10,8 +10,12 @@ var cards_stack = []
 
 var legion_panel_node : LegionPanel = load("res://Demon_assets/legion/legion_panel.tscn").instantiate()
 
+@export var d3d:Demons3D
+@export var demon_count=5
+
+
 func _ready():
-	for i in 5:
+	for i in demon_count:
 		cards_stack.push_back(load("res://Demon_assets/demon_card.tscn").instantiate())
 	(cards_stack.back() as Demon_card).accepted.connect(on_card_accepted)
 	(cards_stack.back() as Demon_card).declined.connect(on_card_declined)
@@ -40,9 +44,9 @@ func on_card_accepted(card : Demon_card):
 	accepted_names.push_back(card.demon.NAME)
 	accepted_demons.push_back(card.demon)
 	reset_current_card()
+	d3d.show(card.get_3d_demon())
 	legion_panel_node.add_displayed_demon(card.demon)
 	Game.player_state.player_legion.add_demon(card.demon)
-	pass
 
 func on_card_declined(card : Demon_card):
 	declined_names.push_back(card.demon.NAME)

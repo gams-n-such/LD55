@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cm1inxwtycgoy"
+path="res://.godot/imported/domo_body-0-imp.obj-a8a2ed46a5dd1f801ce62e465739a8ce.mesh"
+
+[deps]
+
+files=["res://.godot/imported/domo_body-0-imp.obj-a8a2ed46a5dd1f801ce62e465739a8ce.mesh"]
+
+source_file="res://Demon_assets/demons/adv/domo_body-0-imp.obj"
+dest_files=["res://.godot/imported/domo_body-0-imp.obj-a8a2ed46a5dd1f801ce62e465739a8ce.mesh", "res://.godot/imported/domo_body-0-imp.obj-a8a2ed46a5dd1f801ce62e465739a8ce.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="GameLevel" load_steps=9 format=3 uid="uid://brxtqikb26dxu"]
+[gd_resource type="Resource" script_class="GameLevel" load_steps=13 format=3 uid="uid://brxtqikb26dxu"]
 
 [ext_resource type="Script" path="res://Demon_assets/demon_pool_entry.gd" id="1_6udkq"]
 [ext_resource type="Resource" uid="uid://cnenfs8jw1ksf" path="res://Demon_assets/DemonTypes/1_Cultist.tres" id="1_qljul"]
 [ext_resource type="Script" path="res://Demon_assets/demon_pool.gd" id="2_guj2b"]
 [ext_resource type="Resource" uid="uid://xfev8yts5nhh" path="res://Demon_assets/DemonTypes/2_Imp.tres" id="3_efcs8"]
+[ext_resource type="Script" path="res://Enemies/enemy_definition.gd" id="5_elxod"]
 [ext_resource type="Script" path="res://Core/game_level.gd" id="5_swalj"]
+[ext_resource type="Script" path="res://Enemies/enemy_group.gd" id="6_ny4mb"]
 
 [sub_resource type="Resource" id="Resource_7ch7w"]
 script = ExtResource("1_6udkq")
@@ -20,9 +22,22 @@ demon = ExtResource("3_efcs8")
 script = ExtResource("2_guj2b")
 entiries = Array[ExtResource("1_6udkq")]([SubResource("Resource_7ch7w"), SubResource("Resource_26thm")])
 
+[sub_resource type="Resource" id="Resource_qpfxn"]
+script = ExtResource("5_elxod")
+level = 1
+power = 1.0
+health = 10.0
+attack_speed = 1.0
+move_speed = 10.0
+
+[sub_resource type="Resource" id="Resource_spfi1"]
+script = ExtResource("6_ny4mb")
+enemy_count = 5
+enemy = SubResource("Resource_qpfxn")
+
 [resource]
 script = ExtResource("5_swalj")
 location_name = "Village"
 demon_count = 5
 demon_pool = SubResource("Resource_pjil5")
-enemies = Array[Resource]([])
+enemies = Array[ExtResource("6_ny4mb")]([SubResource("Resource_spfi1")])
