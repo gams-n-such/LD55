@@ -3,10 +3,11 @@ extends CanvasLayer
 var accepted_names = []
 var declined_names = []
 var cards_stack = []
-
+@export var d3d:Demons3D
+@export var demon_count=5
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in 5:
+	for i in demon_count:
 		cards_stack.push_back(load("res://Demon_assets/demon_card.tscn").instantiate())
 	(cards_stack.back() as Demon_card).accepted.connect(on_card_accepted)
 	(cards_stack.back() as Demon_card).declined.connect(on_card_declined)
@@ -32,6 +33,7 @@ func reset_current_card():
 func on_card_accepted(card : Demon_card):
 	accepted_names.push_back(card.demon.Name)
 	reset_current_card()
+	d3d.show(card.get_3d_demon())
 	pass
 
 func on_card_declined(card : Demon_card):

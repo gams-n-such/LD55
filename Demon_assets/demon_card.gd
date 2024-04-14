@@ -10,6 +10,9 @@ signal declined(from : Demon_card)
 
 var demon
 
+func get_3d_demon():
+	return $PanelContainer/SubViewportContainer/photo/Privew3dDemon/demon_look
+
 func _enter_tree():
 	demon = load("res://Demon_assets/Demon.tscn").instantiate()
 	print("my name is:"+name)

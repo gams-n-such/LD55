@@ -7,11 +7,77 @@ var Name := "name " + str(randi_range(0, 2048))
 
 @export var SPEED = 15.0
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
+var home_pos:Vector3
+var attack=true
+var acctive=false
+
+func _ready():
+	call_deferred("actor_setup")
+	actor_setup()
+
+func actor_setup():
+	print("AS")
+	# Wait for the first physics frame so the NavigationServer can sync.
+	await get_tree().physics_frame
+
+	# Now that the navigation map is no longer empty, set the movement target.
+	#set_movement_target(NavigationServer3D.map_get_closest_point_to_segment(
+	#		get_world_3d().navigation_map,
+	#		$"../goal".global_position,
+	#		$"../goal".global_position+Vector3.DOWN*100.0
+	#		))
+	set_movement_target($"../../goal".global_position)
+	home_pos=global_position
+			
+	print("SET",NavigationServer3D.map_get_closest_point_to_segment(
+			get_world_3d().navigation_map,
+			$"../../goal".global_position,
+			$"../../goal".global_position+Vector3.DOWN*100.0
+			))
+
 
 func _physics_process(delta):
-	# movement
-	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	move_in_direction(input_dir, delta)
+	if acctive:
+		# movement
+		var input_dir = Vector2.ZERO#Input.get_vector("left", "right", "forward", "backward")
+		if Input.is_key_pressed(KEY_UP):
+			input_dir+=Vector2.UP
+		if Input.is_key_pressed(KEY_DOWN):
+			input_dir+=Vector2.DOWN
+		#move_in_direction(input_dir, delta)
+		#print($"../goal".global_position-global_position)
+		$NavigationAgent3D.path_desired_distance = 0.5
+		$NavigationAgent3D.target_desired_distance = 0.5
+		if $NavigationAgent3D.is_navigation_finished():
+			#if not $NavigationAgent3D.is_target_reachable():
+				#print("???????")
+			#print("END")
+			if attack==true:
+				attack=false
+				set_movement_target(home_pos)
+			else:
+				attack=true
+				set_movement_target($"../../goal".global_position)
+			return
+		
+		#set_movement_target($"../goal".global_position)
+		
+		var current_agent_position: Vector3 = global_position
+		var next_path_position: Vector3 = $NavigationAgent3D.get_next_path_position()
+
+		velocity = current_agent_position.direction_to(next_path_position) * 10.0
+		#move_in_direction(Vector2(velocity.x,velocity.z), delta)
+		self.global_position=global_position+velocity*delta
+	
+func set_movement_target(movement_target: Vector3):
+	$NavigationAgent3D.set_target_position(movement_target)
+
+
+	
+
+	
+	
+	
 
 func move_in_direction(input_dir : Vector2, delta : float):
 	if not is_on_floor():
