@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_ju1n7")
 label = "Pit Lord"
+level = 7
 power = 1.0
 attack_speed = 1.0
 health = 10.0
 move_speed = 10.0
+possible_names = Array[String](["NoName"])
