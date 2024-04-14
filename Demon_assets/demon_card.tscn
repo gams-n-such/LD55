@@ -12,8 +12,8 @@
 
 [node name="Demon_card" type="CanvasLayer" node_paths=PackedStringArray("accept", "decline")]
 script = ExtResource("1_sc3gs")
-accept = NodePath("PanelContainer/Info_vbox/Buttons_grid/decline")
-decline = NodePath("PanelContainer/Info_vbox/Buttons_grid/accept")
+accept = NodePath("PanelContainer/Info_vbox/Buttons_grid/accept")
+decline = NodePath("PanelContainer/Info_vbox/Buttons_grid/decline")
 
 [node name="Control2" type="Control" parent="."]
 layout_mode = 3
