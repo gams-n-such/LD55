@@ -45,6 +45,8 @@ func on_card_accepted(card : Demon_card):
 	accepted_demons.push_back(card.demon)
 	reset_current_card()
 	d3d.show(card.get_3d_demon())
+	for desire : Desire in card.demon.STATS["Desires"] :
+		desire.apply(card.demon)
 	legion_panel_node.add_displayed_demon(card.demon)
 	Game.player_state.player_legion.add_demon(card.demon)
 
