@@ -1,11 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://capc2nhihv440"]
+[gd_scene load_steps=3 format=3 uid="uid://capc2nhihv440"]
 
 [ext_resource type="Script" path="res://AnswerButton.gd" id="1_vqiwl"]
 
-[node name="AnswerButton" type="Button"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k3p88"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="AnswerButton" type="PanelContainer"]
 offset_right = 8.0
 offset_bottom = 8.0
-text = "Text"
+theme_override_styles/panel = SubResource("StyleBoxFlat_k3p88")
 script = ExtResource("1_vqiwl")
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[node name="Answer" type="Label" parent="."]
+layout_mode = 2
+text = "text"
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

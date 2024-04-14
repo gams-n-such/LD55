@@ -3,5 +3,10 @@ class_name Messenger_button
 
 var chat : Chat
 
+signal pressed(chat : Chat)
+
+func _init(demon : Demon):
+	
+
 func _on_button_pressed():
-	pass # Replace with function body.
+	pressed.emit(chat)

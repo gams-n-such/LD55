@@ -75,7 +75,7 @@ theme_override_font_sizes/font_size = 32
 text = "Appname"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_cjw7a")]
+[node name="MessengerButton" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_cjw7a")]
 layout_mode = 2
 
 [node name="CanvasLayer" parent="PanelContainer/HBoxContainer" instance=ExtResource("3_nxkhl")]

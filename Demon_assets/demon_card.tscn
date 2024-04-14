@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcuacx14apjca"]
 
-[ext_resource type="Script" path="res://Demon_assets/demon_card.gd" id="1_sc3gs"]
-[ext_resource type="Texture2D" uid="uid://bsce5kqkcacvi" path="res://Demon_assets/accept-svgrepo-com.svg" id="2_dj31m"]
-[ext_resource type="Texture2D" uid="uid://dh1mbr82dy11b" path="res://Demon_assets/demon_preview.jpg" id="2_faytf"]
-[ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/decline-solid-svgrepo-com.svg" id="3_dml05"]
+[ext_resource type="Script" path="res://Demon_assets/Tinder/demon_card.gd" id="1_sc3gs"]
+[ext_resource type="Texture2D" uid="uid://bsce5kqkcacvi" path="res://Demon_assets/Tinder/accept-svgrepo-com.svg" id="2_dj31m"]
+[ext_resource type="Texture2D" uid="uid://dh1mbr82dy11b" path="res://Demon_assets/Tinder/demon_preview.jpg" id="2_faytf"]
+[ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/Tinder/decline-solid-svgrepo-com.svg" id="3_dml05"]
 
 [node name="Demon_card" type="CanvasLayer"]
 script = ExtResource("1_sc3gs")

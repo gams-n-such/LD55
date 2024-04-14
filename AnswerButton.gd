@@ -4,7 +4,7 @@ class_name Answer
 signal pressed_from(from : Answer)
 
 func _init(str : String = ""):
-	self.text = str
+	$Answer.text = str
 
-func _on_pressed():
+func _on_button_pressed():
 	pressed_from.emit(self)
