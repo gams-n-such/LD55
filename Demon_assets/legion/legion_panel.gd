@@ -7,6 +7,7 @@ var displayed_legion_cards : Array[LegionCard] = []
 
 var scene = preload("res://Demon_assets/legion/card/legion_card.tscn")
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for demon in displayed_demons :
@@ -26,7 +27,6 @@ func on_card_delete_pressed(card : LegionCard):
 
 func add_displayed_demon(demon : Demon):
 	var card = load("res://Demon_assets/legion/card/legion_card.tscn").instantiate()
-	#card.get_script()
 	(card as LegionCard).displayed_demon = demon
 	displayed_legion_cards.append(card)
 	demon_cards_scroll_container.add_child(card)
