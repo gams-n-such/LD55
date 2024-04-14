@@ -1,18 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://mbf1rb05qkoc"]
+[gd_scene load_steps=3 format=3 uid="uid://mbf1rb05qkoc"]
 
 [ext_resource type="Script" path="res://Demon_assets/legion/legion_panel.gd" id="1_ic6kq"]
 [ext_resource type="Texture2D" uid="uid://c6hx6ovr5m3xb" path="res://Demon_assets/legion/assets/legion_background.png" id="2_5roti"]
-[ext_resource type="PackedScene" uid="uid://cebu5lkjfyd3s" path="res://Demon_assets/legion/card/legion_card.tscn" id="2_8ehos"]
 
 [node name="LegionPanel" type="Control"]
 custom_minimum_size = Vector2(250, 648)
 layout_mode = 3
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 32.0
-offset_right = 270.0
-offset_bottom = 32.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -292.0
+offset_bottom = 356.0
+grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(1, 0.9)
 size_flags_horizontal = 3
@@ -28,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_5roti")
 
-[node name="MarginContainer" type="MarginContainer" parent="Background"]
+[node name="M" type="MarginContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,34 +42,22 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+[node name="V" type="VBoxContainer" parent="Background/M"]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
+[node name="HeaderContainer" type="HBoxContainer" parent="Background/M/V"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer/Header"]
+[node name="HeaderNameLabel" type="Label" parent="Background/M/V/HeaderContainer"]
 layout_mode = 2
 text = "YOUR LEGION"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Background/MarginContainer/VBoxContainer"]
+[node name="DemonCardsScrollContainer" type="ScrollContainer" parent="Background/M/V"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="DemonCardsContainer" type="VBoxContainer" parent="Background/M/V/DemonCardsScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="DemonCard1" parent="Background/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_8ehos")]
-layout_mode = 2
-
-[node name="DemonCard2" parent="Background/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_8ehos")]
-layout_mode = 2
-
-[node name="DemonCard3" parent="Background/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_8ehos")]
-layout_mode = 2
-
-[node name="DemonCard4" parent="Background/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_8ehos")]
-layout_mode = 2

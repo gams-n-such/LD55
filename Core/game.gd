@@ -26,3 +26,4 @@ func switch_to_how_to_play_level():
 
 func switch_to_sandbox_level():
 	get_tree().change_scene_to_packed(sandbox_scene)
+
