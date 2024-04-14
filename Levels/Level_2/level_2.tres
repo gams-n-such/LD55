@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="Level" load_steps=2 format=3 uid="uid://dw5syr6rjehh6"]
+[gd_resource type="Resource" script_class="GameLevel" load_steps=4 format=3 uid="uid://dw5syr6rjehh6"]
 
+[ext_resource type="Script" path="res://Demon_assets/demon_pool.gd" id="1_8edjh"]
 [ext_resource type="Script" path="res://Core/game_level.gd" id="1_rowjh"]
+
+[sub_resource type="Resource" id="Resource_cbitc"]
+script = ExtResource("1_8edjh")
+entiries = Array[Resource("res://Demon_assets/demon_pool_entry.gd")]([])
 
 [resource]
 script = ExtResource("1_rowjh")
 location_name = "Town"
-demon_count = 0
-enemies = Array[Resource]([])
+demon_count = 3
+demon_pool = SubResource("Resource_cbitc")
+enemies = Array[Resource("res://Enemies/enemy_group.gd")]([])
