@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwltufm4ohyee"
-path="res://.godot/imported/decline-solid-svgrepo-com.svg-6c61f9ff908f4c725d04c987784c41fa.ctex"
+uid="uid://dh1mbr82dy11b"
+path="res://.godot/imported/demon_preview.jpg-daf293cc0bc1251cfd10f89a8190a987.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Demon_assets/decline-solid-svgrepo-com.svg"
-dest_files=["res://.godot/imported/decline-solid-svgrepo-com.svg-6c61f9ff908f4c725d04c987784c41fa.ctex"]
+source_file="res://Demon_assets/Tinder/demon_preview.jpg"
+dest_files=["res://.godot/imported/demon_preview.jpg-daf293cc0bc1251cfd10f89a8190a987.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

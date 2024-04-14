@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctup8kv46emkg"]
+
+[ext_resource type="Script" path="res://Demon_assets/Tinder/messenger.gd" id="1_ad64y"]
+[ext_resource type="PackedScene" uid="uid://8c8dinbi47je" path="res://Demon_assets/Tinder/messenger_button.tscn" id="2_cjw7a"]
+[ext_resource type="PackedScene" uid="uid://e07s6bjy44vj" path="res://Demon_assets/Tinder/chat.tscn" id="3_nxkhl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jsbkn"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnf6k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he1mm"]
+bg_color = Color(0.298039, 0.298039, 0.298039, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_ad64y")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(300, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -300.0
+offset_right = 150.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jsbkn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_constants/separation = -300
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 600)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rnf6k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_he1mm")
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Appname" type="Label" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer/Header/Margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Appname"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_cjw7a")]
+layout_mode = 2
+
+[node name="CanvasLayer" parent="PanelContainer/HBoxContainer" instance=ExtResource("3_nxkhl")]
+visible = false
+layout_mode = 2

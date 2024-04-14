@@ -58,5 +58,7 @@ func connect_signals():
 	%decline.pressed.connect(on_decline_pressed)
 
 func disconnect_signals():
+	%accept.disabled = true
+	%decline.disabled = true
 	%accept.pressed.disconnect(on_accept_pressed)
 	%decline.pressed.disconnect(on_decline_pressed)

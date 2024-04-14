@@ -10,7 +10,7 @@ var cards_stack = []
 
 func _ready():
 	for i in 5:
-		cards_stack.push_back(load("res://Demon_assets/demon_card.tscn").instantiate())
+		cards_stack.push_back(load("res://Demon_assets/Tinder/demon_card.tscn").instantiate())
 	(cards_stack.back() as Demon_card).accepted.connect(on_card_accepted)
 	(cards_stack.back() as Demon_card).declined.connect(on_card_declined)
 	add_child(cards_stack.back())

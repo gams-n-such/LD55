@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsce5kqkcacvi"
-path="res://.godot/imported/accept-svgrepo-com.svg-ec9642b1bfcb386928d706893897f0c5.ctex"
+uid="uid://cwltufm4ohyee"
+path="res://.godot/imported/decline-solid-svgrepo-com.svg-e27c2c7b8db8b49cf25ec5459be3fcb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Demon_assets/accept-svgrepo-com.svg"
-dest_files=["res://.godot/imported/accept-svgrepo-com.svg-ec9642b1bfcb386928d706893897f0c5.ctex"]
+source_file="res://Demon_assets/Tinder/decline-solid-svgrepo-com.svg"
+dest_files=["res://.godot/imported/decline-solid-svgrepo-com.svg-e27c2c7b8db8b49cf25ec5459be3fcb6.ctex"]
 
 [params]
 
