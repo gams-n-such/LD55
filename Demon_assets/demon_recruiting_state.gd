@@ -1,9 +1,4 @@
-class_name Level extends Node
-
-@export var location : Location
-@export var demon_pool : DemonPool
-@export var demon_count : int = 0
-@export var enemies : Array[Resource] = []
+class_name DemonRecruitingState extends Node
 
 
 # Called when the node enters the scene tree for the first time.

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DemonType" load_steps=2 format=3 uid="uid://xfev8yts5nhh"]
+
+[ext_resource type="Script" path="res://Demon_assets/demon_type.gd" id="1_fqndx"]
+
+[resource]
+script = ExtResource("1_fqndx")
+label = "Imp"
+level = 2
+power = 1.0
+attack_speed = 1.0
+health = 10.0
+move_speed = 10.0
+possible_names = Array[String](["NoName"])

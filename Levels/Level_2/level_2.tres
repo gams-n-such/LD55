@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Level" load_steps=2 format=3 uid="uid://dw5syr6rjehh6"]
+
+[ext_resource type="Script" path="res://Core/game_level.gd" id="1_rowjh"]
+
+[resource]
+script = ExtResource("1_rowjh")
+location_name = "Town"
+demon_count = 0
+enemies = Array[Resource]([])

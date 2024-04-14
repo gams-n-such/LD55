@@ -1,12 +1,4 @@
-class_name Campaign extends Node
+class_name Campaign extends Resource
 
-@export var levels : Array[Level] = []
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+@export var levels : Array[GameLevel] = []
+@export var current_player_state : String

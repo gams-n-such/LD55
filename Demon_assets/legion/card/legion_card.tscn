@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://cebu5lkjfyd3s"]
+
+[ext_resource type="Script" path="res://Demon_assets/legion/card/legion_card.gd" id="1_hkrv7"]
+[ext_resource type="Texture2D" uid="uid://bttqvh1mdd64m" path="res://Demon_assets/legion/assets/demon_card_background.png" id="2_38eui"]
+[ext_resource type="Texture2D" uid="uid://b4hl7wpdygadp" path="res://icon.svg" id="3_82rxl"]
+[ext_resource type="Texture2D" uid="uid://lil2hc45do5b" path="res://Demon_assets/legion/assets/delete_demon_button.png" id="3_qr6si"]
+
+[node name="DemonCard" type="Control"]
+custom_minimum_size = Vector2(210, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 180.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_hkrv7")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_38eui")
+
+[node name="V" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DemonIcon" type="NinePatchRect" parent="Background/V"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_82rxl")
+
+[node name="M" type="MarginContainer" parent="Background/V"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="DemonStatsContainer" type="VBoxContainer" parent="Background/V/M"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="DemonDescriptionContainer" type="HBoxContainer" parent="Background/V/M/DemonStatsContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Background/V/M/DemonStatsContainer/DemonDescriptionContainer"]
+layout_mode = 2
+text = "Aboba Demonovich"
+
+[node name="HPAndPowerContainer" type="HBoxContainer" parent="Background/V/M/DemonStatsContainer"]
+layout_mode = 2
+
+[node name="HP" type="Label" parent="Background/V/M/DemonStatsContainer/HPAndPowerContainer"]
+layout_mode = 2
+text = "HP: 32767"
+
+[node name="Power" type="Label" parent="Background/V/M/DemonStatsContainer/HPAndPowerContainer"]
+layout_mode = 2
+text = "Power: 666"
+
+[node name="AbilityAndFactionContainer" type="VBoxContainer" parent="Background/V/M/DemonStatsContainer"]
+layout_mode = 2
+
+[node name="AbilityLabel" type="Label" parent="Background/V/M/DemonStatsContainer/AbilityAndFactionContainer"]
+layout_mode = 2
+text = "Ability: sucks dicks"
+
+[node name="FactionLabel" type="Label" parent="Background/V/M/DemonStatsContainer/AbilityAndFactionContainer"]
+layout_mode = 2
+text = "Faction: amoguses"
+
+[node name="ForegroundInterfaceContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+
+[node name="DeleteDemonButton" type="TextureButton" parent="ForegroundInterfaceContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_qr6si")

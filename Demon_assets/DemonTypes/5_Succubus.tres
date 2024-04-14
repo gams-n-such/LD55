@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DemonType" load_steps=2 format=3 uid="uid://bos4jltlyp0re"]
+
+[ext_resource type="Script" path="res://Demon_assets/demon_type.gd" id="1_bkrrn"]
+
+[resource]
+script = ExtResource("1_bkrrn")
+label = "Succubus"
+level = 5
+power = 1.0
+attack_speed = 1.0
+health = 10.0
+move_speed = 10.0
+possible_names = Array[String](["NoName"])

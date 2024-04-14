@@ -1,6 +1,9 @@
-class_name Location extends Node
+class_name LegionCard extends Control
 
-@export var location_name : String
+@export var displayed_demon : Demon
+
+func _init(demon : Demon):
+	displayed_demon = demon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
