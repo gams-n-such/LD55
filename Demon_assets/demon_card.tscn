@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ikhqs0utn87o"]
+[gd_scene load_steps=5 format=3 uid="uid://dcuacx14apjca"]
 
 [ext_resource type="Script" path="res://Demon_assets/demon_card.gd" id="1_sc3gs"]
 [ext_resource type="Texture2D" uid="uid://bsce5kqkcacvi" path="res://Demon_assets/accept-svgrepo-com.svg" id="2_dj31m"]

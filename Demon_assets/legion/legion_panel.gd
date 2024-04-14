@@ -1,4 +1,4 @@
-class_name LegionPanel extends GridContainer
+class_name LegionPanel extends Control
 
 @export var displayed_legion : Legion
 
