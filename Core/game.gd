@@ -6,6 +6,7 @@ extends Node
 
 @export var player_state : PlayerState = PlayerState.new()
 
+var current_level:GameLevel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -26,3 +27,4 @@ func switch_to_how_to_play_level():
 
 func switch_to_sandbox_level():
 	get_tree().change_scene_to_packed(sandbox_scene)
+

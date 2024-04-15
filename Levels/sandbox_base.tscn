@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://chnrykoi3xbev"]
+
+[ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/demon_manager.tscn" id="1_36qtt"]
+[ext_resource type="Script" path="res://Levels/Demons3D.gd" id="2_egavv"]
+[ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="3_8hq87"]
+[ext_resource type="PackedScene" uid="uid://du0ksrustblls" path="res://person.tscn" id="4_by5d6"]
+[ext_resource type="Script" path="res://Levels/Enemies.gd" id="4_xds00"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p5csc"]
+
+[sub_resource type="Environment" id="Environment_lo5cv"]
+background_mode = 1
+background_color = Color(0.976471, 0.976471, 0.976471, 1)
+background_energy_multiplier = 0.0
+ambient_light_source = 2
+ambient_light_color = Color(0.701961, 0.815686, 0.67451, 1)
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_light_color = Color(0.231373, 0.0196078, 0, 1)
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="Demon_manager" parent="." node_paths=PackedStringArray("d3d") instance=ExtResource("1_36qtt")]
+d3d = NodePath("../Demons3D")
+demon_count = 4
+
+[node name="Demons3D" type="Node" parent="."]
+script = ExtResource("2_egavv")
+
+[node name="Demon4" parent="Demons3D" instance=ExtResource("3_8hq87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.49838, 2.01138, 20.0463)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Demons3D/Demon4"]
+avoidance_enabled = true
+radius = 4.0
+debug_enabled = true
+
+[node name="Demon3" parent="Demons3D" instance=ExtResource("3_8hq87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95762, 2.01138, 20.0463)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Demons3D/Demon3"]
+avoidance_enabled = true
+radius = 4.0
+debug_enabled = true
+
+[node name="Demon2" parent="Demons3D" instance=ExtResource("3_8hq87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15496, 2.01138, 20.0463)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Demons3D/Demon2"]
+avoidance_enabled = true
+radius = 4.0
+debug_enabled = true
+
+[node name="Demon" parent="Demons3D" instance=ExtResource("3_8hq87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7792, 2.01138, 20.0463)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Demons3D/Demon"]
+avoidance_enabled = true
+radius = 4.0
+debug_enabled = true
+
+[node name="goal" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3033, 1.39888, 0)
+mesh = SubResource("SphereMesh_p5csc")
+
+[node name="Enemies" type="Node" parent="."]
+script = ExtResource("4_xds00")
+
+[node name="Person" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.72156, 0, -16.7329)
+
+[node name="Person2" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22684, 0, -16.7329)
+
+[node name="Person3" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2953, 0, -16.7329)
+
+[node name="Person4" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2953, 0, -16.7329)
+
+[node name="Person5" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2433, 0, -16.7329)
+
+[node name="Person6" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.72156, 0, -28.7826)
+
+[node name="Person7" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22684, 0, -28.7826)
+
+[node name="Person8" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2953, 0, -28.7826)
+
+[node name="Person9" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2953, 0, -28.7826)
+
+[node name="Person10" parent="Enemies" instance=ExtResource("4_by5d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2433, 0, -28.7826)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lo5cv")

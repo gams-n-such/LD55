@@ -6,7 +6,7 @@ var Health=MaxHealth
 var Damage := randf_range(10.0, 50.0)
 var Name := "name " + str(randi_range(0, 2048))
 
-@export var SPEED = 25.0
+@export var SPEED = 5.0
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 var home_pos:Vector3
 var attack=true
@@ -76,7 +76,8 @@ func _physics_process(delta):
 			else:
 				attack=true
 				upadate_taget()
-				set_movement_target(target.global_position)
+				if target!=null:
+					set_movement_target(target.global_position)
 			return
 		
 		#set_movement_target($"../goal".global_position)
@@ -86,7 +87,7 @@ func _physics_process(delta):
 
 		velocity = current_agent_position.direction_to(next_path_position) * 10.0
 		#move_in_direction(Vector2(velocity.x,velocity.z), delta)
-		self.global_position=global_position+velocity*delta
+		self.global_position=global_position+velocity*delta*SPEED
 	
 func set_movement_target(movement_target: Vector3):
 	$NavigationAgent3D.set_target_position(movement_target)
@@ -109,7 +110,8 @@ var STATS := {
 	"Health" : 1,
 	"Sacrifice value" : 0, 
 	"Fraction" : Fraction.none,
-	"Abilities" : [Abilities.none]
+	"Abilities" : [Abilities.none],
+	"Desires" : [Desire]
 }
 
 # Demon requirements
@@ -131,6 +133,10 @@ func _init(level : int = 1, power : int = 1, health : int = 1, sacrifice_value :
 	STATS["Sacrifice value"] = sacrifice_value 
 	STATS["Fraction"] = fraction
 	STATS["Abilities"] = abilities
+	var random_desire : Desire = Desire.new()
+	random_desire.bonus = RandomBonusGenerator.new().getRandomBonus()
+	random_desire.condition = RandomConditionGenerator.new().getRandomCondition()
+	STATS["Desires"] = [random_desire]
 
 #func _physics_process(delta):
 #	# movement
