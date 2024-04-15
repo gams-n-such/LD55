@@ -8,6 +8,11 @@ var declined_names = []
 var accepted_demons = []
 var cards_stack = []
 
+@export var d3d:Demons3D
+@export var demon_count=5
+
+
+
 func _ready():
 	for i in 5:
 		cards_stack.push_back(load("res://Demon_assets/Tinder/demon_card.tscn").instantiate())
@@ -36,8 +41,8 @@ func on_card_accepted(card : Demon_card):
 	accepted_names.push_back(card.demon.NAME)
 	accepted_demons.push_back(card.demon)
 	reset_current_card()
+	d3d.show(card.get_3d_demon())
 	Game.player_state.player_legion.add_demon(card.demon)
-	pass
 
 func on_card_declined(card : Demon_card):
 	declined_names.push_back(card.demon.NAME)

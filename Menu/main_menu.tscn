@@ -34,12 +34,10 @@ layout_mode = 2
 text = "How to play"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 text = "Options"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 text = "Quit"
 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dh1mbr82dy11b" path="res://Demon_assets/Tinder/demon_preview.jpg" id="2_faytf"]
 [ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/Tinder/decline-solid-svgrepo-com.svg" id="3_dml05"]
 
-[node name="Demon_card" type="CanvasLayer"]
+[node name="Demon_card2" type="CanvasLayer"]
 script = ExtResource("1_sc3gs")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

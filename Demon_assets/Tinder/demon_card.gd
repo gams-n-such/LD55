@@ -5,13 +5,30 @@ class_name Demon_card
 signal accepted(from : Demon_card)
 signal declined(from : Demon_card)
 
-@onready var demon = load("res://Demon_assets/Demon.tscn").instantiate()
+
+@export var accept:BaseButton
+@export var decline:BaseButton
+
+var demon
+var demon3d
+
+func get_3d_demon():
+	return %SubViewport/Privew3dDemon/demon_look
+	
+
+func _enter_tree():
+	demon = load("res://Demon_assets/Demon.tscn").instantiate()
+	demon3d = load("res://privew_3d_demon.tscn").instantiate()
+	print("my name is:"+name)
+
+#@onready var demon = load("res://Demon_assets/Demon.tscn").instantiate()
 @onready var ANIMATION_DURATION := 0.75
+
 
 func _ready():
 	# add demon to subviewport for preview
-	%SubViewport.add_child(demon)
-	demon.position = %Camera3D.position - Vector3(0, 1, 2)
+	%SubViewport.add_child(demon3d)
+	#demon.position = %Camera3D.position - Vector3(0, 1, 2)
 	
 	# set name and age
 	%name.text = demon.NAME
