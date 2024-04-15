@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ikhqs0utn87o"]
+[gd_scene load_steps=6 format=3 uid="uid://ikhqs0utn87o"]
 
 [ext_resource type="Script" path="res://Demon_assets/Tinder/demon_card.gd" id="1_sc3gs"]
+[ext_resource type="PackedScene" uid="uid://xq0hhga5te1q" path="res://privew_3d_demon.tscn" id="2_a0llp"]
 [ext_resource type="Texture2D" uid="uid://bsce5kqkcacvi" path="res://Demon_assets/Tinder/accept-svgrepo-com.svg" id="2_dj31m"]
 [ext_resource type="Texture2D" uid="uid://dh1mbr82dy11b" path="res://Demon_assets/Tinder/demon_preview.jpg" id="2_faytf"]
 [ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/Tinder/decline-solid-svgrepo-com.svg" id="3_dml05"]
@@ -34,13 +35,7 @@ handle_input_locally = false
 size = Vector2i(300, 600)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="PanelContainer/SubViewportContainer/SubViewport"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
-keep_aspect = 0
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PanelContainer/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.999693, 0.0247637, 0, -0.0247637, 0.999693, 0, 0, 0, 1, 0, 1.23143, 0)
+[node name="Privew3dDemon" parent="PanelContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_a0llp")]
 
 [node name="photo" type="TextureRect" parent="PanelContainer"]
 visible = false
