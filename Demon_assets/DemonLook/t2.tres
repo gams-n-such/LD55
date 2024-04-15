@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DemonLookResource" load_steps=2 format=3 uid="uid://c670mqhkcxq7o"]
+
+[ext_resource type="Script" path="res://Demon_assets/demon_look_resource.gd" id="1_mg2ui"]
+
+[resource]
+script = ExtResource("1_mg2ui")
+head = 0
+biome = 0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://xq0hhga5te1q"]
+[gd_scene load_steps=18 format=3 uid="uid://d2uig8x87eq8s"]
 
 [ext_resource type="Script" path="res://Demon_assets/demons/randomhead.gd" id="1_tuuii"]
 [ext_resource type="ArrayMesh" uid="uid://b82vvl47wp8ac" path="res://Demon_assets/demons/adv/domo_body-1-imp.obj" id="2_mp1qm"]
 [ext_resource type="Script" path="res://Demon_assets/demons/Domo.gd" id="3_jui1j"]
+[ext_resource type="Resource" uid="uid://de10w83e4xx3y" path="res://Demon_assets/DemonLook/t1.tres" id="3_r0nox"]
 [ext_resource type="ArrayMesh" uid="uid://cm1inxwtycgoy" path="res://Demon_assets/demons/adv/domo_body-0-imp.obj" id="4_xc600"]
 [ext_resource type="ArrayMesh" uid="uid://c5mqgqw50fa83" path="res://Demon_assets/demons/adv/domo_body-2-body.obj" id="5_uguf6"]
 [ext_resource type="Texture2D" uid="uid://bnqyypn825i3b" path="res://Demon_assets/demons/adv/demo_logo2.png" id="6_86qvk"]
@@ -37,30 +38,30 @@ albedo_color = Color(0.141176, 0.141176, 0.141176, 0.301961)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.835779, 0.549067, 0, -0.549067, 0.835779, -0.0672223, 7.45937, 7.86175)
-keep_aspect = 0
 
 [node name="demon_look" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195392, -0.393422, 0.0151144)
-
-[node name="randomhead" type="Node3D" parent="demon_look"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27069, 0)
-script = ExtResource("1_tuuii")
-
-[node name="Domo3" type="MeshInstance3D" parent="demon_look/randomhead"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35545, 0, 0)
-mesh = ExtResource("2_mp1qm")
-skeleton = NodePath("../../..")
-script = ExtResource("3_jui1j")
-
-[node name="Domo2" type="MeshInstance3D" parent="demon_look/randomhead"]
-mesh = ExtResource("4_xc600")
-skeleton = NodePath("../../..")
-script = ExtResource("3_jui1j")
 
 [node name="Domo" type="MeshInstance3D" parent="demon_look"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27069, 0)
 mesh = ExtResource("5_uguf6")
 skeleton = NodePath("../..")
+script = ExtResource("3_jui1j")
+look = ExtResource("3_r0nox")
+is_main = true
+
+[node name="head" type="Node3D" parent="demon_look/Domo"]
+script = ExtResource("1_tuuii")
+
+[node name="Domo3" type="MeshInstance3D" parent="demon_look/Domo/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35545, 0, 0)
+mesh = ExtResource("2_mp1qm")
+skeleton = NodePath("../../../..")
+script = ExtResource("3_jui1j")
+
+[node name="Domo2" type="MeshInstance3D" parent="demon_look/Domo/head"]
+mesh = ExtResource("4_xc600")
+skeleton = NodePath("../../../..")
 script = ExtResource("3_jui1j")
 
 [node name="randomlogo" type="Node3D" parent="demon_look"]

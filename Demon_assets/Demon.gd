@@ -111,7 +111,7 @@ var STATS := {
 	"Sacrifice value" : 0, 
 	"Fraction" : Fraction.none,
 	"Abilities" : [Abilities.none],
-	"Desires" : [Desire]
+	"Desires":[]
 }
 
 # Demon requirements
@@ -133,10 +133,6 @@ func _init(level : int = 1, power : int = 1, health : int = 1, sacrifice_value :
 	STATS["Sacrifice value"] = sacrifice_value 
 	STATS["Fraction"] = fraction
 	STATS["Abilities"] = abilities
-	var random_desire : Desire = Desire.new()
-	random_desire.bonus = RandomBonusGenerator.new().getRandomBonus()
-	random_desire.condition = RandomConditionGenerator.new().getRandomCondition()
-	STATS["Desires"] = [random_desire]
 
 #func _physics_process(delta):
 #	# movement
