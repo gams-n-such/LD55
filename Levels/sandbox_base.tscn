@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://chnrykoi3xbev"]
 
-[ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/demon_manager.tscn" id="1_36qtt"]
+[ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/Tinder/demon_manager.tscn" id="1_36qtt"]
 [ext_resource type="Script" path="res://Levels/Demons3D.gd" id="2_egavv"]
 [ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="3_8hq87"]
 [ext_resource type="PackedScene" uid="uid://du0ksrustblls" path="res://person.tscn" id="4_by5d6"]
