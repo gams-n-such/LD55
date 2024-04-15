@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://6ljb5se6p8od"]
+
+[ext_resource type="Script" path="res://Battler/unit_spawner.gd" id="1_3t5lm"]
+[ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="2_n0plp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvwp3"]
+size = Vector3(2, 1, 5)
+
+[node name="UnitSpawner" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0380857, 0)
+script = ExtResource("1_3t5lm")
+unit_scene = ExtResource("2_n0plp")
+area_extent = Vector3(2, 1, 5)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="BoxShape" type="CollisionShape3D" parent="Area3D"]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_nvwp3")

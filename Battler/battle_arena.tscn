@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://c606iw2diglu5"]
+
+[ext_resource type="Script" path="res://Battler/battle_arena.gd" id="1_tny8i"]
+[ext_resource type="PackedScene" uid="uid://6ljb5se6p8od" path="res://Battler/unit_spawner.tscn" id="2_dcgcf"]
+[ext_resource type="Resource" uid="uid://brxtqikb26dxu" path="res://Levels/Level_1/level_1.tres" id="2_gju3j"]
+[ext_resource type="PackedScene" uid="uid://kbcjw50h88gd" path="res://Battler/gray_box.tscn" id="3_u47qd"]
+
+[node name="BattleArena" type="Node"]
+script = ExtResource("1_tny8i")
+selected_level = ExtResource("2_gju3j")
+
+[node name="BattlerWorld" type="Node3D" parent="."]
+
+[node name="DemonSpawner" parent="BattlerWorld" instance=ExtResource("2_dcgcf")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0)
+
+[node name="EnemySpawner" parent="BattlerWorld" instance=ExtResource("2_dcgcf")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 1, 0)
+
+[node name="Camera" type="Camera3D" parent="BattlerWorld"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0.642788, -0.766044, 0, 0.766044, 0.642788, 1, 2.80972e-08, -3.34849e-08, -15, 10, 0)
+keep_aspect = 0
+
+[node name="Blockout" type="Node3D" parent="BattlerWorld"]
+
+[node name="Road" parent="BattlerWorld/Blockout" instance=ExtResource("3_u47qd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00305805, 0.0025301, 0.00423193)
+box_size = Vector3(20, 1, 10)
+
+[node name="Wall" parent="BattlerWorld/Blockout" instance=ExtResource("3_u47qd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 5)
+box_size = Vector3(20, 3, 1)
+box_color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="Wall2" parent="BattlerWorld/Blockout" instance=ExtResource("3_u47qd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5)
+box_size = Vector3(20, 3, 1)
+box_color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="Box" parent="BattlerWorld/Blockout" instance=ExtResource("3_u47qd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+box_size = Vector3(1, 2, 10)
+box_color = Color(0.568627, 0.568627, 0.568627, 1)
+
+[node name="Box2" parent="BattlerWorld/Blockout" instance=ExtResource("3_u47qd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+box_size = Vector3(1, 2, 10)
+box_color = Color(0.568627, 0.568627, 0.568627, 1)
+
+[node name="BattlerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="unit_spawned" from="BattlerWorld/DemonSpawner" to="." method="_on_demon_unit_spawned"]
+[connection signal="unit_spawned" from="BattlerWorld/EnemySpawner" to="." method="_on_enemy_unit_spawned"]
