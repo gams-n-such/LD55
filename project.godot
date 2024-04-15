@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Game="*res://Core/game.gd"
 DemonGenerator="*res://Demons/demon_generator.gd"
+PlayerState="*res://Core/player_state.gd"
 
 [input]
 

@@ -12,7 +12,7 @@ func getRandomCondition() -> Condition:
 		var desired_faction = Demon.Fraction.values().pick_random()
 		result.description = "You should have at least one demon of %s faction!" % str(desired_faction)
 		result.check = func () -> bool :
-			for demon : Demon in Game.player_state.player_legion.legion :
+			for demon : Demon in PlayerState.player_legion.legion :
 				if (demon.STATS["Fraction"] == desired_faction) :
 					return true
 			return false
@@ -21,7 +21,7 @@ func getRandomCondition() -> Condition:
 		var desired_power = rng.randi_range(5, 50)
 		result.description = "You should have at least one demon with at least %s power!" % str(desired_power)
 		result.check = func () -> bool :
-			for demon : Demon in Game.player_state.player_legion.legion :
+			for demon : Demon in PlayerState.player_legion.legion :
 				if (demon.STATS["Power"] >= desired_power) :
 					return true
 			return false
@@ -30,7 +30,7 @@ func getRandomCondition() -> Condition:
 		var desired_hp = rng.randi_range(5, 50)
 		result.description = "You should have at least one demon with at least %s HP!" % str(desired_hp)
 		result.check = func () -> bool :
-			for demon : Demon in Game.player_state.player_legion.legion :
+			for demon : Demon in PlayerState.player_legion.legion :
 				if (demon.STATS["Health"] >= desired_hp) :
 					return true
 			return false

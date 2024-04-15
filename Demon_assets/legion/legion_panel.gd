@@ -1,6 +1,6 @@
 class_name LegionPanel extends Control
 
-var displayed_demons : Array[Demon] = Game.player_state.player_legion.legion
+var displayed_demons : Array[Demon] = PlayerState.player_legion.legion
 var displayed_legion_cards : Array[LegionCard] = []
 
 @onready var demon_cards_scroll_container : VBoxContainer = $Background/M/V/DemonCardsScrollContainer/DemonCardsContainer
@@ -20,7 +20,7 @@ func _ready():
 
 
 func on_card_delete_pressed(card : LegionCard):
-	Game.player_state.player_legion.remove_demon(card.displayed_demon)
+	PlayerState.player_legion.remove_demon(card.displayed_demon)
 	displayed_legion_cards.remove_at(displayed_legion_cards.find(card))
 	demon_cards_scroll_container.remove_child(card)
 
@@ -34,5 +34,5 @@ func add_displayed_demon(demon : Demon):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

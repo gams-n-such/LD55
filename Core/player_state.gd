@@ -1,4 +1,4 @@
-class_name PlayerState extends Node
+extends Node
 
 @export var player_name : String = ""
 @export var player_legion : Legion = Legion.new()
@@ -10,9 +10,12 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
+func reset():
+	
+	pass
 
 func add_demon_recruiting_state(demon_recruiting_state : DemonRecruitingState):
 	player_liked.append(demon_recruiting_state)
