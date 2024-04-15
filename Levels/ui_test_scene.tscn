@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxtq3qx5uuka8"]
+
+[ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="1_7luf4"]
+[ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/Tinder/demon_manager.tscn" id="2_yy123"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pms0h"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2upgq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffn0c"]
+albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.617365, 0.786677, 0, -0.786677, 0.617365, 0, 4.8062, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14.5466, 23.5954)
+
+[node name="Demon_manager" parent="." node_paths=PackedStringArray("d3d") instance=ExtResource("2_yy123")]
+d3d = NodePath("")
+demon_count = 4
+
+[node name="Demon" parent="." instance=ExtResource("1_7luf4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7792, 2.01138, 20.0463)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Demon"]
+avoidance_enabled = true
+radius = 4.0
+debug_enabled = true
+
+[node name="ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 8.2168, 0, 0, 0, 0.999997, 3.8147e-06, -3.63006, -0.00018692)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+shape = SubResource("BoxShape3D_pms0h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground/CollisionShape3D"]
+mesh = SubResource("BoxMesh_2upgq")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ffn0c")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://8c8dinbi47je"]
+
+[ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/Tinder/decline-solid-svgrepo-com.svg" id="1_1vlpv"]
+[ext_resource type="Script" path="res://Demon_assets/Tinder/messenger_button.gd" id="1_ivgf5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7ftv"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MessengerButton" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h7ftv")
+script = ExtResource("1_ivgf5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+clip_children = 1
+layout_direction = 1
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_1vlpv")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Name"
+
+[node name="Last msg" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Last msg
+"
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

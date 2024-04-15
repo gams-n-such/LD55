@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2uig8x87eq8s"]
+[gd_scene load_steps=17 format=3 uid="uid://xq0hhga5te1q"]
 
 [ext_resource type="Script" path="res://Demon_assets/demons/randomhead.gd" id="1_tuuii"]
 [ext_resource type="ArrayMesh" uid="uid://b82vvl47wp8ac" path="res://Demon_assets/demons/adv/domo_body-1-imp.obj" id="2_mp1qm"]
@@ -37,6 +37,7 @@ albedo_color = Color(0.141176, 0.141176, 0.141176, 0.301961)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.835779, 0.549067, 0, -0.549067, 0.835779, -0.0672223, 7.45937, 7.86175)
+keep_aspect = 0
 
 [node name="demon_look" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195392, -0.393422, 0.0151144)

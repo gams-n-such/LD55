@@ -15,8 +15,8 @@ var legion_panel_node : LegionPanel = load("res://Demon_assets/legion/legion_pan
 
 
 func _ready():
-	for i in demon_count:
-		cards_stack.push_back(load("res://Demon_assets/demon_card.tscn").instantiate())
+	for i in 5:
+		cards_stack.push_back(load("res://Demon_assets/Tinder/demon_card.tscn").instantiate())
 	(cards_stack.back() as Demon_card).accepted.connect(on_card_accepted)
 	(cards_stack.back() as Demon_card).declined.connect(on_card_declined)
 	add_child(cards_stack.back())
@@ -45,6 +45,8 @@ func on_card_accepted(card : Demon_card):
 	accepted_demons.push_back(card.demon)
 	reset_current_card()
 	d3d.show(card.get_3d_demon())
+	for desire : Desire in card.demon.STATS["Desires"] :
+		desire.apply(card.demon)
 	legion_panel_node.add_displayed_demon(card.demon)
 	Game.player_state.player_legion.add_demon(card.demon)
 

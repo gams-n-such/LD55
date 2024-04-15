@@ -27,7 +27,7 @@ func _enter_tree():
 
 func _ready():
 	# add demon to subviewport for preview
-	%SubViewport.add_child(demon3d)
+	#%SubViewport.add_child(demon3d)
 	#demon.position = %Camera3D.position - Vector3(0, 1, 2)
 	
 	# set name and age
@@ -41,6 +41,7 @@ func _ready():
 		var stat_value_label := Label.new()
 		stat_name_label.text = stat_name
 		stat_value_label.text = str(demon.STATS[stat_name])
+		#stat_value_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 		stats_grid.add_child(stat_name_label)
 		stats_grid.add_child(stat_value_label)
 	
@@ -75,5 +76,7 @@ func connect_signals():
 	%decline.pressed.connect(on_decline_pressed)
 
 func disconnect_signals():
+	%accept.disabled = true
+	%decline.disabled = true
 	%accept.pressed.disconnect(on_accept_pressed)
 	%decline.pressed.disconnect(on_decline_pressed)
