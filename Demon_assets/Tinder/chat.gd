@@ -2,22 +2,20 @@ extends PanelContainer
 class_name Chat
 
 signal new_msg(msg : String)
+signal successfull_rizz(demon : Demon)
+
+var demon : Demon = null
 
 func _ready():
-	send_message("from me", true)
-	send_message("to me", false)
-	send_message("from me again", true)
-	send_message("one more time", true)
-	var answers = [
-		["option 1", 1],
-		["option 2", 2],
-		["option 3", 3]
-	]
-	add_answer_options(answers)
+	change_stage(1)
 
-func change_stage(stage : int):
-	# TODO
-	pass
+func change_stage(stage_id : int):
+	if stage_id == 5:
+		successfull_rizz.emit(demon)
+	var stage = DialogueManager.get_stage_by_id(stage_id)
+	print(str(stage))
+	send_message(stage["Question"], false)
+	add_answer_options(stage["Answers"])
 
 func send_message(msg : String, from_me : bool):
 	var stylebox := StyleBoxFlat.new()

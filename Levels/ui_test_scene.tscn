@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxtq3qx5uuka8"]
 
 [ext_resource type="PackedScene" uid="uid://pjgixyo0f7oi" path="res://Demon_assets/Demon.tscn" id="1_7luf4"]
-[ext_resource type="PackedScene" uid="uid://djwqtpngmogyb" path="res://Demon_assets/Tinder/demon_manager.tscn" id="2_yy123"]
+[ext_resource type="PackedScene" uid="uid://e07s6bjy44vj" path="res://Demon_assets/Tinder/chat.tscn" id="3_ae64s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pms0h"]
 
@@ -17,10 +17,6 @@ transform = Transform3D(1, 0, 0, 0, 0.617365, 0.786677, 0, -0.786677, 0.617365, 
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14.5466, 23.5954)
-
-[node name="Demon_manager" parent="." node_paths=PackedStringArray("d3d") instance=ExtResource("2_yy123")]
-d3d = NodePath("")
-demon_count = 4
 
 [node name="Demon" parent="." instance=ExtResource("1_7luf4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7792, 2.01138, 20.0463)
@@ -43,3 +39,5 @@ shape = SubResource("BoxShape3D_pms0h")
 mesh = SubResource("BoxMesh_2upgq")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ffn0c")
+
+[node name="ChatPanel" parent="." instance=ExtResource("3_ae64s")]
