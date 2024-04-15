@@ -11,5 +11,5 @@
 
 [resource]
 script = ExtResource("1_gi6yi")
-levels = Array[Resource("res://Core/level.gd")]([ExtResource("1_px5nd"), ExtResource("2_lgj1f"), ExtResource("3_xh3li"), ExtResource("4_074vb"), ExtResource("5_wvg4g"), ExtResource("6_jrkwn"), ExtResource("7_fcn5f")])
+levels = Array[Resource("res://Core/game_level.gd")]([ExtResource("1_px5nd"), ExtResource("2_lgj1f"), ExtResource("3_xh3li"), ExtResource("4_074vb"), ExtResource("5_wvg4g"), ExtResource("6_jrkwn"), ExtResource("7_fcn5f")])
 current_player_state = ""
