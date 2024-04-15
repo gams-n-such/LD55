@@ -110,7 +110,8 @@ var STATS := {
 	"Health" : 1,
 	"Sacrifice value" : 0, 
 	"Fraction" : Fraction.none,
-	"Abilities" : [Abilities.none]
+	"Abilities" : [Abilities.none],
+	"Desires":[]
 }
 
 # Demon requirements
