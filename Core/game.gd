@@ -12,11 +12,15 @@ extends Node
 var current_level : GameLevel
 var current_campaign : Campaign = preload("res://Levels/main_campaign.tres")
 
+var player_state : PlayerState:
+	get:
+		return %PlayerState
+
 func _ready():
 	pass
 
 func start_new_game(with_tutorial : bool):
-	PlayerState.reset()
+	player_state.reset()
 	if with_tutorial:
 		# TODO
 		get_tree().change_scene_to_packed(tinder_scene)

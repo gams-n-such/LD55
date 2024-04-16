@@ -15,8 +15,5 @@ func _process(_delta):
 func add_demon(demon : Demon):
 	legion.append(demon)
 
-
 func remove_demon(demon : Demon):
-	var demon_index = legion.find(demon, 0)
-	if demon_index > -1 :
-		legion.remove_at(demon_index)
+	legion.erase(demon)

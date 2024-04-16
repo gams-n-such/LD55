@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8jwbut6bvete"]
+
+[ext_resource type="Script" path="res://Core/game.gd" id="1_3pmjd"]
+[ext_resource type="PackedScene" uid="uid://bqf8udh0jvb0o" path="res://Core/player_state.tscn" id="2_x8pxo"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_3pmjd")
+
+[node name="PlayerState" parent="." instance=ExtResource("2_x8pxo")]
+unique_name_in_owner = true

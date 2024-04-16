@@ -35,7 +35,7 @@ func _on_demon_unit_spawned(unit):
 func _on_demon_killed(demon):
 	spawned_demons.erase(demon)
 	if spawned_demons.is_empty():
-		# Lose
+		handle_player_loss()
 		pass
 
 
@@ -46,5 +46,12 @@ func _on_enemy_unit_spawned(unit):
 func _on_enemy_killed(enemy):
 	spawned_enemies.erase(enemy)
 	if spawned_enemies.is_empty():
-		# Win
+		handle_player_victory()
 		pass
+
+
+func handle_player_victory():
+	pass
+
+func handle_player_loss():
+	pass

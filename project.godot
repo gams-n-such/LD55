@@ -17,9 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Game="*res://Core/game.gd"
+Game="*res://Core/game.tscn"
 DemonGenerator="*res://Demons/demon_generator.gd"
-PlayerState="*res://Core/player_state.gd"
 DialogueManager="*res://Core/dialogue_manager.gd"
 
 [input]
