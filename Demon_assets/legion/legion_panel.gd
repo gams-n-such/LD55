@@ -1,6 +1,6 @@
 class_name LegionPanel extends Control
 
-var displayed_demons : Array[Demon] = PlayerState.player_legion.legion
+var displayed_demons : Array[Demon] = Game.get_hired_demons()
 var displayed_legion_cards : Array[LegionCard] = []
 
 @onready var demon_cards_scroll_container : VBoxContainer = $Background/M/V/DemonCardsScrollContainer/DemonCardsContainer
@@ -20,7 +20,8 @@ func _ready():
 
 
 func on_card_delete_pressed(card : LegionCard):
-	PlayerState.player_legion.remove_demon(card.displayed_demon)
+	#Game.kill_demon(card.displayed_demon)
+	Game.kill_demon(null)
 	displayed_legion_cards.remove_at(displayed_legion_cards.find(card))
 	demon_cards_scroll_container.remove_child(card)
 

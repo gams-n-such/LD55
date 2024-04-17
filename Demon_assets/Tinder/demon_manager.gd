@@ -15,6 +15,7 @@ var legion_panel_node : LegionPanel
 
 
 func _ready():
+	return
 	for i in 5:
 		cards_stack.push_back(load("res://Demon_assets/Tinder/demon_card.tscn").instantiate())
 	(cards_stack.back() as Demon_card).accepted.connect(on_card_accepted)
@@ -48,7 +49,7 @@ func on_card_accepted(card : Demon_card):
 	for desire : Desire in card.demon.STATS["Desires"] :
 		desire.apply(card.demon)
 	legion_panel_node.add_displayed_demon(card.demon)
-	PlayerState.player_legion.add_demon(card.demon)
+	Game.hire_demon(card.demon, [])
 
 func on_card_declined(card : Demon_card):
 	declined_names.push_back(card.demon.NAME)
