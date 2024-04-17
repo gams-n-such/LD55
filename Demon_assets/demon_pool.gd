@@ -1,3 +1,6 @@
-class_name DemonPool extends Resource
+class_name DemonPool extends WeightedRandomPool
 
-@export var entiries : Array[DemonPoolEntry] = []
+@export var entries : Array[DemonPoolEntry] = []
+
+func get_entries():
+	return entries
