@@ -5,11 +5,11 @@ extends Node
 @onready var sandbox_scene : PackedScene = load("res://Levels/sandbox.tscn")
 
 # TODO
-@onready var tutorial_scene : PackedScene = load("res://Battler/battle_arena.tscn")
+@onready var tutorial_scene : PackedScene = load("res://Tinder/tinder_scene.tscn")
 @onready var tinder_scene : PackedScene = load("res://Tinder/tinder_scene.tscn")
 @onready var arena_scene : PackedScene = load("res://Battler/battle_arena.tscn")
 # TODO
-@onready var win_scene : PackedScene = load("res://Battler/battle_arena.tscn")
+@onready var win_scene : PackedScene = load("res://Menu/main_menu.tscn")
 
 @export var current_campaign : Campaign = preload("res://Levels/main_campaign.tres")
 var current_level : GameLevel
@@ -23,11 +23,15 @@ func _ready():
 
 # Demons
 
-func get_hired_demons():
-	return %Legion.get_children()
+func get_hired_demons() -> Array[DemonInstance]:
+	var result : Array[DemonInstance]
+	result.assign(%Legion.get_children())
+	return result
 
-func get_liked_demons():
-	return %LikedDemons.get_children()
+func get_liked_demons() -> Array[DemonInstance]:
+	var result : Array[DemonInstance]
+	result.assign(%LikedDemons.get_children())
+	return result
 
 func like_demon(demon : DemonInstance) -> bool:
 	if not demon:
