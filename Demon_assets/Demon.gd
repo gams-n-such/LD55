@@ -1,17 +1,16 @@
-extends CharacterBody3D
-class_name Demon
+class_name Demon extends CharacterBody3D
 
+var Health : float = MaxHealth
 var MaxHealth := randf_range(100.0, 500.0)
-var Health=MaxHealth
 var Damage := randf_range(10.0, 50.0)
 var Name := "name " + str(randi_range(0, 2048))
 
 @export var SPEED = 5.0
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
-var home_pos:Vector3
-var attack=true
-var acctive=false
-var target:Person
+var home_pos : Vector3
+var attack = true
+var acctive = false
+var target : Person
 
 # TODO implement fractions and abilities
 enum Fraction {none}
