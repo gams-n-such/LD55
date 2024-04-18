@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bm6q1lt7kiyfi"]
+
+[ext_resource type="Script" path="res://Battler/battler_unit.gd" id="1_55xs2"]
+[ext_resource type="Script" path="res://Demon_assets/hpBar.gd" id="2_sidt3"]
+[ext_resource type="Script" path="res://Battler/Attributes/attribute.gd" id="3_hfkfq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g0r45"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3wjel"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g6dbd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aad33"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qg6e6"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.643137, 0.321569, 1)
+
+[node name="BattlerUnit" type="CharacterBody3D"]
+script = ExtResource("1_55xs2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_g0r45")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_3wjel")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="hpBar" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 4.93016, 0)
+mesh = SubResource("BoxMesh_g6dbd")
+surface_material_override/0 = SubResource("StandardMaterial3D_aad33")
+script = ExtResource("2_sidt3")
+
+[node name="green" type="MeshInstance3D" parent="hpBar"]
+transform = Transform3D(0.5, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0)
+mesh = SubResource("BoxMesh_g6dbd")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_qg6e6")
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_hfkfq")
+_starting_value = null
+has_min_value = null
+min_value = null
+has_max_value = null
+max_value = null
+
+[connection signal="value_changed" from="Health" to="." method="_on_health_value_changed"]
