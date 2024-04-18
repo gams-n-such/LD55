@@ -1,26 +1,13 @@
-[gd_resource type="Resource" script_class="GameLevel" load_steps=13 format=3 uid="uid://brxtqikb26dxu"]
+[gd_resource type="Resource" script_class="GameLevel" load_steps=8 format=3 uid="uid://brxtqikb26dxu"]
 
-[ext_resource type="Script" path="res://Demon_assets/demon_pool_entry.gd" id="1_6udkq"]
-[ext_resource type="Resource" uid="uid://cnenfs8jw1ksf" path="res://Demon_assets/DemonTypes/1_Cultist.tres" id="1_qljul"]
 [ext_resource type="Script" path="res://Demon_assets/demon_pool.gd" id="2_guj2b"]
-[ext_resource type="Resource" uid="uid://xfev8yts5nhh" path="res://Demon_assets/DemonTypes/2_Imp.tres" id="3_efcs8"]
 [ext_resource type="Script" path="res://Enemies/enemy_definition.gd" id="5_elxod"]
 [ext_resource type="Script" path="res://Core/game_level.gd" id="5_swalj"]
 [ext_resource type="Script" path="res://Enemies/enemy_group.gd" id="6_ny4mb"]
 
-[sub_resource type="Resource" id="Resource_7ch7w"]
-script = ExtResource("1_6udkq")
-weight = 3.0
-demon = ExtResource("1_qljul")
-
-[sub_resource type="Resource" id="Resource_26thm"]
-script = ExtResource("1_6udkq")
-weight = 1.0
-demon = ExtResource("3_efcs8")
-
 [sub_resource type="Resource" id="Resource_pjil5"]
 script = ExtResource("2_guj2b")
-entiries = Array[ExtResource("1_6udkq")]([SubResource("Resource_7ch7w"), SubResource("Resource_26thm")])
+entries = Array[Resource("res://Demon_assets/demon_pool_entry.gd")]([])
 
 [sub_resource type="Resource" id="Resource_qpfxn"]
 script = ExtResource("5_elxod")
