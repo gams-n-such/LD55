@@ -61,3 +61,6 @@ func remove_modifier(mod : AttributeMod):
 	if is_ancestor_of(mod):
 		mod.queue_free()
 		recalculate_value()
+
+func add_instant(delta : float):
+	base_value += delta

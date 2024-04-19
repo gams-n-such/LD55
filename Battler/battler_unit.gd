@@ -1,4 +1,4 @@
-class_name BatterUnit extends CharacterBody3D
+class_name BattlerUnit extends CharacterBody3D
 
 var _unit_def : UnitDefinition
 @export var unit_definition : UnitDefinition:
@@ -7,49 +7,77 @@ var _unit_def : UnitDefinition
 	set(value):
 		set_definition(value)
 
+# Attributes
 
 var health : Attribute:
 	get:
 		return %Health
 
-var max_health : float = randf_range(100.0, 500.0)
-var health_ : float = max_health
-var damage : float = 1.0
+var damage : Attribute:
+	get:
+		return %Power
+
 var move_speed = 5.0
 var attack_speed : float:
 	get:
 		return 1.0 / (%AttackTimer as Timer).wait_time
-
 @export var SPEED = 5.0
+
+
+
+# AI
+
+signal target_changed(unit : BattlerUnit, new_target : BattlerUnit)
+
+@export var allies_group : String = "Demons"
+@export var enemies_group : String = "Humans"
+
+func get_enemy_units() -> Array[BattlerUnit]:
+	var enemy_nodes = get_tree().get_nodes_in_group(enemies_group)
+	var result : Array[BattlerUnit] = []
+	for enemy in enemy_nodes:
+		var enemy_unit = enemy as BattlerUnit
+		if enemy_unit:
+			result.append(enemy_unit)
+	return result
+
+func get_random_enemy() -> BattlerUnit:
+	return get_enemy_units().pick_random()
+
+var _target : BattlerUnit = null
+var target : BattlerUnit:
+	get:
+		return _target
+	set(value):
+		if target == value:
+			return
+		_target = value
+		target_changed.emit(self, _target)
+
+func find_new_target():
+	target = get_random_enemy()
+
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 var home_pos : Vector3
 var attack = true
 var acctive = false
-var target : Person
 
 # Global variables
-@export var NAME := "name " + str(randi_range(0, 2048))
-#@export var SPEED := 15.0
-#@export var GRAVITY := ProjectSettings.get_setting("physics/3d/default_gravity") as float
 @export var IS_ACTIVE := false
 
 func _init():
+	%HealthBar.attribute = health
 	pass
 
 func _on_ready():
 	assert(unit_definition)
-
-func _enter_tree():
-	assert(unit_definition)
-	if get_node("../../Enemies")!=null:
-		call_deferred("actor_setup")
-	#actor_setup()
+	add_to_group(allies_group)
 
 func set_definition(unit_def : UnitDefinition):
 	unit_definition = unit_def
 	health.max_value = unit_definition.health
 	health.base_value = health.max_value
-	damage = unit_definition.power
+	damage.base_value = unit_definition.power
 	(%AttackTimer as Timer).wait_time = 1.0 / unit_definition.attack_speed
 	pass
 
@@ -61,7 +89,6 @@ func set_definition(unit_def : UnitDefinition):
 #	
 #	if IS_ACTIVE:
 #		move_in_direction(input_dir, delta)
-
 
 func move_in_direction(input_dir : Vector2, delta : float):
 	if not is_on_floor():
@@ -113,33 +140,25 @@ func actor_setup():
 
 
 func _physics_process(delta):
-	$hpBar.hp = health
-	$hpBar.max_hp = max_health
 	if acctive:
 		# movement
-		var input_dir = Vector2.ZERO#Input.get_vector("left", "right", "forward", "backward")
+		var input_dir = Vector2.ZERO
 		if Input.is_key_pressed(KEY_UP):
 			input_dir+=Vector2.UP
 		if Input.is_key_pressed(KEY_DOWN):
 			input_dir+=Vector2.DOWN
-		#move_in_direction(input_dir, delta)
-		#print($"../goal".global_position-global_position)
 		$NavigationAgent3D.path_desired_distance = 0.5
 		$NavigationAgent3D.target_desired_distance = 0.5
 		if $NavigationAgent3D.is_navigation_finished():
-			#if not $NavigationAgent3D.is_target_reachable():
-				#print("???????")
-			#print("END")
 			if attack==true:
 				attack=false
 				set_movement_target(home_pos)
 				if is_instance_valid(target):
-					target.damage(50)
-					self.take_damage(50)
+					target.take_damage(damage)
 			else:
 				attack=true
 				upadate_taget()
-				if target!=null:
+				if target != null:
 					set_movement_target(target.global_position)
 			return
 		
@@ -151,10 +170,12 @@ func _physics_process(delta):
 		velocity = current_agent_position.direction_to(next_path_position) * 10.0
 		#move_in_direction(Vector2(velocity.x,velocity.z), delta)
 		self.global_position=global_position+velocity*delta*SPEED
-	
+
 func set_movement_target(movement_target: Vector3):
 	$NavigationAgent3D.set_target_position(movement_target)
 
+func set_target(new_target):
+	($NavigationAgent3D as NavigationAgent3D).target
 
 func take_damage(dmg): 
 	health.base_value -= dmg
