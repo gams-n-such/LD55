@@ -1,7 +1,8 @@
 extends MeshInstance3D
 
-var hp=5.0
-var max_hp=10.0
+var hp = 5.0
+var max_hp = 10.0
+
 
 func _process(_delta):
 	var value=float(hp)/float(max_hp)
@@ -9,4 +10,5 @@ func _process(_delta):
 	$green.scale.x=value*1.01
 	if value<0:
 		visible=false
-	
+
+
