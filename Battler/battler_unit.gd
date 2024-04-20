@@ -1,5 +1,7 @@
 class_name BattlerUnit extends CharacterBody3D
 
+#region Unit
+
 var _unit_def : UnitDefinition
 @export var unit_definition : UnitDefinition:
 	get:
@@ -7,25 +9,87 @@ var _unit_def : UnitDefinition
 	set(value):
 		set_definition(value)
 
-# Attributes
+func set_definition(unit_def : UnitDefinition):
+	unit_definition = unit_def
+	health_attribute.max_value = unit_definition.health
+	health_attribute.base_value = health_attribute.max_value
+	power_attribute.base_value = unit_definition.power
+	speed_attribute.base_value = unit_definition.speed
+	attack_range_attribute.base_value = unit_definition.range
 
-var health : Attribute:
+#endregion
+
+#region Attributes
+
+var health_attribute : Attribute:
 	get:
 		return %Health
 
-var damage : Attribute:
+var health : float:
+	get:
+		return health_attribute.value
+
+var max_health : float:
+	get:
+		return health_attribute.max_value
+
+func take_damage(dmg : float) -> void: 
+	health_attribute.base_value -= dmg
+
+func _on_health_value_changed(attribute: Attribute, new_value: float) -> void:
+	if new_value <= 0:
+		queue_free()
+
+var alive : bool:
+	get:
+		return health > 0
+
+var power_attribute : Attribute:
 	get:
 		return %Power
 
-var move_speed = 5.0
+var attack_damage : float:
+	get:
+		return power_attribute.value
+
+var attack_range_attribute : Attribute:
+	get:
+		return %AttackRange
+
+var attack_range : float:
+	get:
+		return attack_range_attribute.value
+
+var speed_attribute : Attribute:
+	get:
+		return %Speed
+
 var attack_speed : float:
 	get:
-		return 1.0 / (%AttackTimer as Timer).wait_time
-@export var SPEED = 5.0
+		return speed_attribute.value
 
+var move_speed_attribute : Attribute:
+	get:
+		return %MoveSpeed
 
+var move_speed : float:
+	get:
+		return move_speed_attribute.value
 
-# AI
+var _move_speed_mod : AttributeMod = null
+
+func _on_speed_value_changed(attribute: Attribute, new_value: float):
+	(%AttackTimer as Timer).wait_time = 1.0 / new_value
+	if _move_speed_mod:
+		move_speed_attribute.remove_modifier(_move_speed_mod)
+	var new_move_speed_mod_info : AttributeModInfo = AttributeModInfo.new()
+	new_move_speed_mod_info.mod_type = AttributeModInfo.ModType.ADD_PERCENT
+	new_move_speed_mod_info.mod_value = speed_attribute.value - 1.0
+	_move_speed_mod = move_speed_attribute.add_modifier(new_move_speed_mod_info)
+
+#endregion
+
+#region AI
 
 signal target_changed(unit : BattlerUnit, new_target : BattlerUnit)
 
@@ -37,7 +101,7 @@ func get_enemy_units() -> Array[BattlerUnit]:
 	var result : Array[BattlerUnit] = []
 	for enemy in enemy_nodes:
 		var enemy_unit = enemy as BattlerUnit
-		if enemy_unit:
+		if is_instance_valid(enemy_unit):
 			result.append(enemy_unit)
 	return result
 
@@ -54,16 +118,97 @@ var target : BattlerUnit:
 		_target = value
 		target_changed.emit(self, _target)
 
+func has_valid_target() -> bool:
+	return is_instance_valid(target)
+
 func find_new_target():
 	target = get_random_enemy()
 
-var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
-var home_pos : Vector3
-var attack = true
-var acctive = false
+#endregion
 
-# Global variables
-@export var IS_ACTIVE := false
+#region Attacking
+
+func has_target_in_range() -> bool:
+	if not has_valid_target():
+		return false
+	else:
+		return global_position.distance_to(target.global_position) < attack_range
+
+func is_attacking() -> bool:
+	return not (%AttackTimer as Timer).is_stopped()
+
+func start_attacking():
+	if is_attacking():
+		return
+	(%AttackTimer as Timer).start()
+
+func stop_attacking(immediately : bool = true):
+	if not is_attacking:
+		return
+	(%AttackTimer as Timer).stop()
+
+func _on_attack_timer_timeout():
+	deal_damage(target)
+
+func deal_damage(target_unit : BattlerUnit):
+	if target_unit:
+		target_unit.take_damage(attack_damage)
+
+#endregion
+
+#region Movement
+
+var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var nav_agent : NavigationAgent3D:
+	get:
+		return %NavAgent
+
+func update_nav_target():
+	var current_desired_position = global_position
+	if has_valid_target():
+		current_desired_position = target.global_position
+	set_nav_target(current_desired_position)
+
+func set_nav_target(movement_target: Vector3):
+	var nav_point = NavigationServer3D.map_get_closest_point(
+			get_world_3d().navigation_map, movement_target)
+	nav_agent.set_target_position(nav_point)
+
+func tick_move_by_navigation(delta : float):
+	if nav_agent.is_navigation_finished():
+		return
+	tick_move_towards(nav_agent.get_next_path_position(), delta)
+
+func tick_move_towards(target_point : Vector3, delta : float):
+	if not is_on_floor():
+		velocity.y -= GRAVITY * delta
+	var distance_to_target : Vector3 = target_point - global_position
+	var move_direction : Vector3 = distance_to_target.normalized()
+	velocity.x = move_direction.x * move_speed * delta
+	velocity.z = move_direction.z * move_speed * delta
+	move_and_slide()
+
+func get_dir_to_point(point : Vector3) -> Vector3:
+	return (point - global_position).normalized()
+
+func tick_move_with_input(input_dir : Vector2, delta : float):
+	var world_direction : Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	tick_move_in_direction(world_direction, delta)
+
+func tick_move_in_direction(direction : Vector3, delta : float):
+	if not is_on_floor():
+		velocity.y -= GRAVITY * delta
+	var normalized_dir : Vector3 = direction.normalized()
+	velocity.x = normalized_dir.x * move_speed * delta
+	velocity.z = normalized_dir.z * move_speed * delta
+	move_and_slide()
+
+# Not sure if this is aplicable
+func stop_movement():
+	velocity = Vector3.ZERO
+
+#endregion
 
 func _init():
 	%HealthBar.attribute = health
@@ -73,113 +218,21 @@ func _on_ready():
 	assert(unit_definition)
 	add_to_group(allies_group)
 
-func set_definition(unit_def : UnitDefinition):
-	unit_definition = unit_def
-	health.max_value = unit_definition.health
-	health.base_value = health.max_value
-	damage.base_value = unit_definition.power
-	(%AttackTimer as Timer).wait_time = 1.0 / unit_definition.attack_speed
-	pass
-
-#func _physics_process(delta):
-#	# movement
-#	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-#	
-#	placeholder_animation(delta)
-#	
-#	if IS_ACTIVE:
-#		move_in_direction(input_dir, delta)
-
-func move_in_direction(input_dir : Vector2, delta : float):
-	if not is_on_floor():
-		velocity.y -= GRAVITY * delta
-
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+func _physics_process(delta : float):
+	if not alive:
+		return
+	if not has_valid_target():
+		find_new_target()
+	if has_valid_target():
+		update_nav_target()
+		tick_move_by_navigation(delta)
+		if has_target_in_range():
+			start_attacking()
+		else:
+			stop_attacking()
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	move_and_slide()
-
-var placeholder_animation_value := 0.0
-func placeholder_animation(delta):
-	placeholder_animation_value += delta
-	$MeshInstance3D.scale = Vector3(1.0, (1 + cos(placeholder_animation_value) / 10.0), 1.0)
-
-func upadate_taget():
-	print($"..")
-	print($"../../Enemies")
-	if $"../../Enemies".get_child_count()>0:
-		target=$"../../Enemies".get_child(randi()%$"../../Enemies".get_child_count())
-	else:
-		get_tree().change_scene_to_file("res://Menu/main_menu.tscn")
-		target=null
-
-func actor_setup():
-	# Wait for the first physics frame so the NavigationServer can sync.
-	await get_tree().physics_frame
-
-	# Now that the navigation map is no longer empty, set the movement target.
-	#set_movement_target(NavigationServer3D.map_get_closest_point_to_segment(
-	#		get_world_3d().navigation_map,
-	#		$"../goal".global_position,
-	#		$"../goal".global_position+Vector3.DOWN*100.0
-	#		))
-	upadate_taget()
-	var nav_point = NavigationServer3D.map_get_closest_point_to_segment(
-			get_world_3d().navigation_map,
-			target.global_position,
-			target.global_position + Vector3.DOWN * 100.0
-			)
-	set_movement_target(target.global_position)
-	home_pos = global_position
-
-	print("SET", nav_point)
+		stop_movement()
 
 
-func _physics_process(delta):
-	if acctive:
-		# movement
-		var input_dir = Vector2.ZERO
-		if Input.is_key_pressed(KEY_UP):
-			input_dir+=Vector2.UP
-		if Input.is_key_pressed(KEY_DOWN):
-			input_dir+=Vector2.DOWN
-		$NavigationAgent3D.path_desired_distance = 0.5
-		$NavigationAgent3D.target_desired_distance = 0.5
-		if $NavigationAgent3D.is_navigation_finished():
-			if attack==true:
-				attack=false
-				set_movement_target(home_pos)
-				if is_instance_valid(target):
-					target.take_damage(damage)
-			else:
-				attack=true
-				upadate_taget()
-				if target != null:
-					set_movement_target(target.global_position)
-			return
-		
-		#set_movement_target($"../goal".global_position)
-		
-		var current_agent_position: Vector3 = global_position
-		var next_path_position: Vector3 = $NavigationAgent3D.get_next_path_position()
-
-		velocity = current_agent_position.direction_to(next_path_position) * 10.0
-		#move_in_direction(Vector2(velocity.x,velocity.z), delta)
-		self.global_position=global_position+velocity*delta*SPEED
-
-func set_movement_target(movement_target: Vector3):
-	$NavigationAgent3D.set_target_position(movement_target)
-
-func set_target(new_target):
-	($NavigationAgent3D as NavigationAgent3D).target
-
-func take_damage(dmg): 
-	health.base_value -= dmg
-
-func _on_health_value_changed(attribute: Attribute, new_value: float) -> void:
-	if new_value <= 0:
-		queue_free()
+func _on_attack_range_value_changed(attribute: Attribute, new_value: float):
+	nav_agent.target_desired_distance = attack_range

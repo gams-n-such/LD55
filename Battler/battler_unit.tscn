@@ -18,7 +18,12 @@ shape = SubResource("CapsuleShape3D_g0r45")
 mesh = SubResource("CapsuleMesh_3wjel")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
+
+[node name="HealthBar" parent="." instance=ExtResource("3_gwsjg")]
+unique_name_in_owner = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -31,7 +36,23 @@ script = ExtResource("3_hfkfq")
 unique_name_in_owner = true
 script = ExtResource("3_hfkfq")
 
-[node name="HealthBar" parent="." instance=ExtResource("3_gwsjg")]
+[node name="Speed" type="Node" parent="."]
 unique_name_in_owner = true
+script = ExtResource("3_hfkfq")
+min_value = 0.01
 
+[node name="MoveSpeed" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_hfkfq")
+_starting_value = 5.0
+
+[node name="AttackRange" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_hfkfq")
+_starting_value = 0.5
+min_value = 0.01
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="value_changed" from="Health" to="." method="_on_health_value_changed"]
+[connection signal="value_changed" from="Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="AttackRange" to="." method="_on_attack_range_value_changed"]
