@@ -154,6 +154,9 @@ func deal_damage(target_unit : BattlerUnit):
 	if target_unit:
 		target_unit.take_damage(attack_damage)
 
+func _on_attack_range_value_changed(attribute: Attribute, new_value: float):
+	nav_agent.target_desired_distance = attack_range
+
 #endregion
 
 #region Movement
@@ -232,7 +235,3 @@ func _physics_process(delta : float):
 			stop_attacking()
 	else:
 		stop_movement()
-
-
-func _on_attack_range_value_changed(attribute: Attribute, new_value: float):
-	nav_agent.target_desired_distance = attack_range
