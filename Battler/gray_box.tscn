@@ -15,7 +15,8 @@ resource_local_to_scene = true
 
 [node name="Box" type="StaticBody3D"]
 script = ExtResource("1_n1bc7")
-box_color = Color(0.109804, 0.109804, 0.109804, 1)
+private_box_size = null
+private_box_color = null
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

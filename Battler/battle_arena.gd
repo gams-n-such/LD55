@@ -18,13 +18,15 @@ func init_from_level(level : GameLevel):
 func spawn_enemies_for_level(level : GameLevel):
 	for enemy_group in level.enemies:
 		for enemy_index in enemy_group.enemy_count:
+			print("Spawn enemy...")
 			%EnemySpawner.spawn_unit_from_definition(enemy_group.enemy)
 	pass
 
 func spawn_demons_for_level(level : GameLevel):
 	for enemy_group in level.enemies:
 		for enemy_index in enemy_group.enemy_count:
-			%EnemySpawner.spawn_unit_from_definition(enemy_group.enemy)
+			print("Spawn demons...")
+			%DemonSpawner.spawn_unit_from_definition(enemy_group.enemy)
 	pass
 
 
@@ -55,3 +57,9 @@ func handle_player_victory():
 
 func handle_player_loss():
 	pass
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		print("$$$$$$$$$$4")
+		get_tree().root.print_tree()
+		

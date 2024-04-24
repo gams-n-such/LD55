@@ -33,8 +33,8 @@ var max_health : float:
 	get:
 		return health_attribute.max_value
 
-func take_damage(dmg : float) -> void: 
-	health_attribute.base_value -= dmg
+func take_damage(dmg : float) -> void: #TODO Do we need killer/reason?
+	health_attribute.base_value -= dmg 
 
 func _on_health_value_changed(attribute: Attribute, new_value: float) -> void:
 	if new_value <= 0:
@@ -92,6 +92,8 @@ func _on_speed_value_changed(attribute: Attribute, new_value: float):
 #region AI
 
 signal target_changed(unit : BattlerUnit, new_target : BattlerUnit)
+signal defeated(unit : BattlerUnit) #TODO Do we need killer/reason?
+
 
 @export var allies_group : String = "Demons"
 @export var enemies_group : String = "Humans"
@@ -213,9 +215,10 @@ func stop_movement():
 
 #endregion
 
-func _init():
-	%HealthBar.attribute = health
-	pass
+#######moved to export variable
+#func _init():
+#	%HealthBar.attribute = health
+#	pass
 
 func _on_ready():
 	assert(unit_definition)
