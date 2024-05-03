@@ -22,10 +22,8 @@ skeleton = NodePath("../CollisionShape3D")
 path_desired_distance = 0.5
 target_desired_distance = 0.5
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("_attribute") instance=ExtResource("3_gwsjg")]
+[node name="HealthBar" parent="." instance=ExtResource("3_gwsjg")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12345, 0)
-_attribute = NodePath("../Health")
 
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
