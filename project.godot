@@ -22,6 +22,11 @@ Game="*res://Core/game.tscn"
 DemonGenerator="*res://Demons/demon_generator.gd"
 DialogueManager="*res://Core/dialogue_manager.gd"
 
+[display]
+
+window/size/viewport_width=540
+window/size/viewport_height=960
+
 [input]
 
 forward={
