@@ -14,8 +14,8 @@ script = ExtResource("5_elxod")
 level = 1
 power = 1.0
 health = 10.0
-attack_speed = 1.0
-move_speed = 10.0
+speed = 1.0
+range = 0.5
 
 [sub_resource type="Resource" id="Resource_spfi1"]
 script = ExtResource("6_ny4mb")

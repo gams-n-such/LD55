@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://cuucxm4wtckdg"]
+
+[ext_resource type="Script" path="res://Tinder/tinder_card.gd" id="1_80sc2"]
+[ext_resource type="Texture2D" uid="uid://b4hl7wpdygadp" path="res://icon.svg" id="2_nndh4"]
+[ext_resource type="LabelSettings" uid="uid://r6y6pdbic2bl" path="res://Tinder/tinder_label.tres" id="3_82qlq"]
+[ext_resource type="Texture2D" uid="uid://cwltufm4ohyee" path="res://Demon_assets/Tinder/decline-solid-svgrepo-com.svg" id="4_o3tkb"]
+[ext_resource type="Texture2D" uid="uid://bsce5kqkcacvi" path="res://Demon_assets/Tinder/accept-svgrepo-com.svg" id="5_v7ys7"]
+[ext_resource type="PackedScene" uid="uid://8ieiq1xhasjt" path="res://Tinder/react_button.tscn" id="6_q02qn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61r17"]
+
+[sub_resource type="Gradient" id="Gradient_whx3j"]
+colors = PackedColorArray(0, 0, 0, 0.768627, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kro2n"]
+gradient = SubResource("Gradient_whx3j")
+fill_from = Vector2(1, 0.183761)
+
+[node name="TinderCard" type="Control"]
+clip_children = 1
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_80sc2")
+
+[node name="ProfilePicture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nndh4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Info" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_61r17")
+
+[node name="BottomFade" type="TextureRect" parent="Info"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_kro2n")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Info"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Info/MarginContainer"]
+layout_mode = 2
+
+[node name="DemonNameLabel" type="Label" parent="Info/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 55
+text = "Abobus"
+label_settings = ExtResource("3_82qlq")
+
+[node name="DemonClassLabel" type="Label" parent="Info/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 55
+text = "Abobus"
+label_settings = ExtResource("3_82qlq")
+
+[node name="Control" type="Control" parent="Info"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Info/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 2
+
+[node name="Dislike" parent="Info/Control/GridContainer" instance=ExtResource("6_q02qn")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ButtonColor = Color(1, 0, 0, 1)
+ButtonIcon = ExtResource("4_o3tkb")
+
+[node name="Like" parent="Info/Control/GridContainer" instance=ExtResource("6_q02qn")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ButtonColor = Color(0, 1, 0, 1)
+ButtonIcon = ExtResource("5_v7ys7")
+
+[connection signal="pressed" from="Info/Control/GridContainer/Dislike" to="." method="_on_dislike_pressed"]
+[connection signal="pressed" from="Info/Control/GridContainer/Like" to="." method="_on_like_pressed"]
