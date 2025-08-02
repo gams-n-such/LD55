@@ -3,6 +3,9 @@ class_name WeightedRandomPool extends Resource
 func get_entries() -> Array[WeightedRandomPoolEntry]:
 	return []
 
+func is_empty() -> bool:
+	return get_entries().is_empty()
+
 func get_random_entry() -> WeightedRandomPoolEntry:
 	var entries : Array[WeightedRandomPoolEntry] = get_entries()
 	if entries.is_empty():
@@ -27,3 +30,21 @@ func get_random_object():
 		return random_entry.object
 	else:
 		return null
+
+func get_random_entries(count : int) -> Array[WeightedRandomPoolEntry]:
+	if is_empty():
+		return []
+
+	var result : Array[WeightedRandomPoolEntry] = []
+	for i in count:
+		result.append(get_random_entry())
+
+	return result
+
+func get_random_objects(count : int):
+	var random_entries : Array[WeightedRandomPoolEntry] = get_random_entries(count)
+	var result = random_entries.map(
+		func(entry : WeightedRandomPoolEntry):
+			return entry.object
+	)
+	return result
