@@ -31,8 +31,7 @@ func spawn_unit_from_definition(enemy_definition : UnitDefinition):
 func get_random_spawn_position() -> Vector3:
 	var result : Vector3 = Vector3()
 	var half_box = area_extent / 2
-	print(half_box)
 	result.x = global_position.x + randf_range(-half_box.x, half_box.x)
-	result.z = global_position.z + randf_range(-half_box.z, half_box.z)
-	result.y = global_position.y + half_box.y
+	result.y = global_position.y + randf_range(-half_box.y, half_box.y)
+	result.z = global_position.z + half_box.z
 	return result

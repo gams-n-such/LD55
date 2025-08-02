@@ -5,7 +5,7 @@ extends Node3D
 var hp = 5.0
 var max_hp = 10.0
 
-@export var _attribute : Attribute
+var _attribute : Attribute
 var attribute : Attribute:
 	get:
 		return _attribute
@@ -31,7 +31,6 @@ var percent : float:
 
 func _ready() -> void:
 	assert(attribute)
-	update_value()
 
 func update_value() -> void:
 	var value = percent
