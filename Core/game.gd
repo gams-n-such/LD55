@@ -21,7 +21,7 @@ var player_state : PlayerState:
 func _ready():
 	pass
 
-# Demons
+#region Demons
 
 func get_hired_demons() -> Array[DemonInstance]:
 	var result : Array[DemonInstance]
@@ -76,6 +76,8 @@ func hire_demon(demon : DemonInstance, sacrifices : Array[DemonInstance]) -> boo
 	demon.reparent(%Legion)
 	return true
 
+#endregion
+
 # Game flow and changing scenes
 
 func start_new_game(with_tutorial : bool):
@@ -88,6 +90,8 @@ func start_new_game(with_tutorial : bool):
 func start_campaign():
 	assert(not current_campaign.levels.is_empty())
 	start_level(0)
+
+#region Levels
 
 func move_to_previous_level():
 	var cur_level_idx = current_campaign.levels.find(current_level)
@@ -124,3 +128,4 @@ func switch_to_how_to_play_level():
 func switch_to_sandbox_level():
 	get_tree().change_scene_to_packed(sandbox_scene)
 
+#endregion

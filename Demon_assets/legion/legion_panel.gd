@@ -1,6 +1,6 @@
 class_name LegionPanel extends Control
 
-var displayed_demons : Array[Demon] = Game.get_hired_demons()
+var displayed_demons : Array[Demon] = []
 var displayed_legion_cards : Array[LegionCard] = []
 
 @onready var demon_cards_scroll_container : VBoxContainer = $Background/M/V/DemonCardsScrollContainer/DemonCardsContainer

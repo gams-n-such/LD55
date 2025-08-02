@@ -1,6 +1,4 @@
-extends CanvasLayer
-
-class_name Demon_card
+class_name Demon_card extends CanvasLayer
 
 signal accepted(from : Demon_card)
 signal declined(from : Demon_card)
